@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  title: MyString
+  teaser: MyText
+  body: MyText
+  version: MyString
+  changelog: MyText
+  message: MyString
+  freezebody: MyText
+  state: 1
+  submitted: 2012-11-18
+  accepted: 2012-11-18
+
+two:
+  user_id: 1
+  title: MyString
+  teaser: MyText
+  body: MyText
+  version: MyString
+  changelog: MyText
+  message: MyString
+  freezebody: MyText
+  state: 1
+  submitted: 2012-11-18
+  accepted: 2012-11-18

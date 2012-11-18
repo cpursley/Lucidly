@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @dream.user_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @dream.title %>
+</p>
+
+<p>
+  <b>Teaser:</b>
+  <%= @dream.teaser %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @dream.body %>
+</p>
+
+<p>
+  <b>Version:</b>
+  <%= @dream.version %>
+</p>
+
+<p>
+  <b>Changelog:</b>
+  <%= @dream.changelog %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%= @dream.message %>
+</p>
+
+<p>
+  <b>Freezebody:</b>
+  <%= @dream.freezebody %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @dream.state %>
+</p>
+
+<p>
+  <b>Submitted:</b>
+  <%= @dream.submitted %>
+</p>
+
+<p>
+  <b>Accepted:</b>
+  <%= @dream.accepted %>
+</p>
+
+
+<%= link_to 'Edit', edit_dream_path(@dream) %> |
+<%= link_to 'Back', dreams_path %>
