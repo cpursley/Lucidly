@@ -1,42 +1,12 @@
-<h1>Listing dreams</h1>
-
-<table>
-  <tr>
-    <th>User</th>
-    <th>Title</th>
-    <th>Teaser</th>
-    <th>Body</th>
-    <th>Version</th>
-    <th>Changelog</th>
-    <th>Message</th>
-    <th>Freezebody</th>
-    <th>State</th>
-    <th>Submitted</th>
-    <th>Accepted</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @dreams.each do |dream| %>
-  <tr>
-    <td><%= dream.user_id %></td>
-    <td><%= dream.title %></td>
-    <td><%= dream.teaser %></td>
-    <td><%= dream.body %></td>
-    <td><%= dream.version %></td>
-    <td><%= dream.changelog %></td>
-    <td><%= dream.message %></td>
-    <td><%= dream.freezebody %></td>
-    <td><%= dream.state %></td>
-    <td><%= dream.submitted %></td>
-    <td><%= dream.accepted %></td>
-    <td><%= link_to 'Show', dream %></td>
-    <td><%= link_to 'Edit', edit_dream_path(dream) %></td>
-    <td><%= link_to 'Destroy', dream, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<section id = "dreams">
+    <% @dreams.each do |dream| %>
+        <dream class="dream">
+            <div class = "title"><%= link_to dream.title, dream %></div>
+            <div class = "byline"><%= dream.created_at.strftime("%B %d, %Y") %></div> 
+            <div class = "teaser"><%= dream.teaser %></div>
+        </dream>  
+    <% end %>
+</section>
 
 <br />
 

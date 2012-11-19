@@ -1,0 +1,14 @@
+<div class="center hero-unit">
+  <h1>About Lucidly</h1>
+
+  <h4>
+    Lucidly is a dream journal.
+  </h4>
+
+  <% if user_signed_in? %> 
+        <% else %> 
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-large btn-primary" %>
+        <% end %>
+
+</div>
+

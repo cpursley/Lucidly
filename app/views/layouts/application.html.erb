@@ -2,56 +2,24 @@
 <html>
 <head>
   <title>Lucidly</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tag %>
+  <%= render 'layouts/shim' %>
 </head>
 
 <body>
-    <header id="page_header"> 
-        <nav id="nav_user">
-            <ul>
-                <% if user_signed_in? %> 
-                    <li><span id="currentuser"><%= current_user.email %></span></li>
-                    &nbsp;
-                    <li><%= link_to "My Profile", edit_user_registration_path %></li>
-                    <li><%= link_to "Sign out", destroy_user_session_path %></li>
-                <% else %> 
-                    <li><%= link_to "Sign up", new_user_registration_path %></li> 
-                    <li><%= link_to "Sign in", new_user_session_path %></li>
-                <% end %>
-            </ul>
-        </nav>    
-    
-        <div id="page_title">
-            <h1>Lucidly <span>A dream journal</span></h1>
-        </div>
-    </header>
-
-
-
+    <%= render 'layouts/header' %>
+    <div class="container">
     <section id="maincontainer">
-        <section id="content">  
-            <section id="flash">
-                <% flash.each do |key, value| %>
-                    <div class="flash <%= key %>"><%= value %></div>
-                <% end %>
-            </section>
+        <section id="flash">
+            <% flash.each do |key, value| %>
+                <div class="flash <%= key %>"><%= value %></div>
+            <% end %>
+        </section>
+        <%= yield %>
+    </div>
 
-            <%= yield %>
-
-    </section>
-
-    <footer id="page_footer"> 
-        <hr />
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
-            <img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" />
-        </a>
-        <br />
-        All content is licensed under 
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
-            Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
-        </a>.
-    </footer>
+    <%= render 'layouts/footer' %>
 </body>
 </html>

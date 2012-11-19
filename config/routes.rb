@@ -1,7 +1,12 @@
 Lucidly::Application.routes.draw do
   devise_for :users
 
-  resources :dreams
+  resources :dreams do
+    collection do
+      get 'about'
+      get 'all'
+    end  
+  end
 
   root :to => "dreams#index"
 
