@@ -1,12 +1,57 @@
-<section id="dreamlebody">
+<section id="dreamheader">
     <h2><%= @dream.title %></h2>
+    <div class="byline">written by <%= link_to @dream.user.fullname, "" %></div>
+      
     <h3><%= @dream.teaser %></h3>
-
-    <div class="textile">
-        <%= @dream.body %>
-    </div>
 </section>
 
+<section id="dreambody" class="textile">
+    <%= @dream.body %>
+</section>
 
-<%= link_to 'Edit', edit_dream_path(@dream) %> |
-<%= link_to 'Back', dreams_path %>
+<% # comments for published articles only %>
+<% if @dream.state == 1 %>
+    <section id="comments"> 
+        <% @comments.each do |comment| %>
+            <dream class="comment">      
+                <div class="commentbody">
+                    <div class="commenthead">               
+                      <%= comment.user.fullname %> - <%=time_ago_in_words(comment.created_at)%> ago 
+                      <% # delete link only for comments written by this particular user %>
+                      <% if user_signed_in? and comment.user_id == current_user.id %>
+                          <span><%= link_to 'delete', dream_comment_path(@dream, comment), :confirm => 'Are you sure?', :method => :delete, :class => "" %></span>
+                      <% end %> 
+                    </div>
+                    <div><%= comment.body %></div>
+                </div>  
+            </dream>
+        <% end %>
+    
+        <% # add a new comment %>   
+        <dream class="comment newcomment">            
+                <% if user_signed_in? %>
+                    <div class="commentbody">
+                        <% if current_user.fullname == nil or current_user.fullname == '' %>
+                            <div class="commenthead">
+                                Please complete your <%= link_to "profile", edit_user_registration_path %> before posting comments.
+                            </div>
+                        <% else %>              
+                            <div class="commenthead">
+                                <%= current_user.fullname %>
+                            </div>
+                            <div>
+                                <%= form_for [@dream, current_user.comments.new] do |f| %>
+                                    <%= f.text_area :body, :size => "100%x20", :class => "fullwidth" %>
+                                    <%= f.submit "Add Comment" %>
+                                <% end %>               
+                            </div>          
+                        <% end %>
+                    </div>  
+                <% else %>
+                    <div class="signin">
+                        Please <%= link_to "sign in", new_user_session_path %> before posting a comment.
+                    </div>
+                <% end %>
+        </dream>
+    </section>
+<% end %>

@@ -6,7 +6,9 @@ Lucidly::Application.routes.draw do
       get 'about'
       get 'all'
       get 'mydreams'
-    end 
+    end
+
+    resources :comments, :only => [:create, :destroy] 
   end
 
 

@@ -26,6 +26,7 @@ class DreamsController < ApplicationController
   # GET /dreams/1.json
   def show
     @dream = Dream.find(params[:id])
+    @comments = @dream.comments.all
 
     respond_to do |format|
       format.html # show.html.erb
