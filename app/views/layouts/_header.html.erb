@@ -4,13 +4,13 @@
       <%= link_to "Lucidly: A dream journal", '/', id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "About", about_dreams_path %></li>
           <li><%= link_to "Dreams", root_path %></li>
-          <li><%= link_to "My Dreams", my_dreams_path %></li>
+          <li><%= link_to "My Dreams", mydreams_dreams_path %></li>
           <% if user_signed_in? %> 
             <li><%= link_to "My Profile", edit_user_registration_path %></li>
             <li><%= link_to "Sign out", destroy_user_session_path %></li>
-          <% else %> 
+          <% else %>
+            <li><%= link_to "About", about_dreams_path %></li> 
             <li><%= link_to "Sign up", new_user_registration_path %></li> 
             <li><%= link_to "Sign in", new_user_session_path %></li>
           <% end %>

@@ -4,9 +4,11 @@ Lucidly::Application.routes.draw do
   resources :dreams do
     collection do
       get 'about'
-      get 'my'
-    end  
+      get 'all'
+      get 'mydreams'
+    end 
   end
+
 
   root :to => "dreams#index"
 

@@ -5,7 +5,7 @@ class DreamsController < ApplicationController
   # GET /dreams
   # GET /dreams.json
   def index
-    @dreams = Dream.where(:state => '1') # public's view - all published articles
+    @dreams = Dream.where(:state => '1') # published view
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,11 +13,12 @@ class DreamsController < ApplicationController
     end
   end
 
-  def my
-    @dreams = Dream.where(:state => ['0', '1']) # user's view - private and published articles    
+  def mydreams
+    @mydreams = Dream.where(:state => ['0', '1']) # published view
+
     respond_to do |format|
-      format.html { render 'index' }                  
-      format.json { render json: @dreams }
+      format.html # index.html.erb
+      format.json { render json: @mydreams }
     end
   end
 
