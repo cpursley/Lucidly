@@ -14,19 +14,19 @@
 ActiveRecord::Schema.define(:version => 20121118232125) do
 
   create_table "dreams", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "title"
-    t.text     "teaser"
-    t.text     "body"
+    t.integer  "user_id",                   :null => false
+    t.string   "title",                     :null => false
+    t.text     "teaser",                    :null => false
+    t.text     "body",                      :null => false
     t.string   "version"
     t.text     "changelog"
     t.string   "message"
     t.text     "freezebody"
-    t.integer  "state"
+    t.integer  "state",      :default => 0, :null => false
     t.date     "submitted"
     t.date     "accepted"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -40,11 +40,15 @@ ActiveRecord::Schema.define(:version => 20121118232125) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "fullname"
+    t.text     "shortbio"
+    t.string   "weburl"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["fullname"], :name => "index_users_on_fullname"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

@@ -39,4 +39,4 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
-# git checkout -b routes-layouts
+# git checkout -b relation-validation

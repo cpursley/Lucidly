@@ -4,7 +4,7 @@ Lucidly::Application.routes.draw do
   resources :dreams do
     collection do
       get 'about'
-      get 'all'
+      get 'my'
     end  
   end
 

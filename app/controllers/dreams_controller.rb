@@ -1,13 +1,22 @@
 class DreamsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :all, :show, :about]
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
   
   # GET /dreams
   # GET /dreams.json
   def index
-    @dreams = Dream.all
+    @dreams = Dream.where(:state => '1') # public's view - all published articles
 
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render json: @dreams }
+    end
+  end
+
+  def my
+    @dreams = Dream.where(:state => ['0', '1']) # user's view - private and published articles    
+    respond_to do |format|
+      format.html { render 'index' }                  
       format.json { render json: @dreams }
     end
   end
@@ -26,8 +35,8 @@ class DreamsController < ApplicationController
   # GET /dreams/new
   # GET /dreams/new.json
   def new
-    @dream = Dream.new
-
+    @dream = current_user.dreams.new
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @dream }
@@ -36,13 +45,13 @@ class DreamsController < ApplicationController
 
   # GET /dreams/1/edit
   def edit
-    @dream = Dream.find(params[:id])
+    @dream = current_user.dreams.find(params[:id])
   end
 
   # POST /dreams
   # POST /dreams.json
   def create
-    @dream = Dream.new(params[:dream])
+    @dream = current_user.dreams.new(params[:dream])
 
     respond_to do |format|
       if @dream.save
@@ -58,7 +67,7 @@ class DreamsController < ApplicationController
   # PUT /dreams/1
   # PUT /dreams/1.json
   def update
-    @dream = Dream.find(params[:id])
+    @dream = current_user.dreams.find(params[:id])
 
     respond_to do |format|
       if @dream.update_attributes(params[:dream])
@@ -74,12 +83,15 @@ class DreamsController < ApplicationController
   # DELETE /dreams/1
   # DELETE /dreams/1.json
   def destroy
-    @dream = Dream.find(params[:id])
+    @dream = current_user.dreams.find(params[:id])
     @dream.destroy
 
     respond_to do |format|
       format.html { redirect_to dreams_url }
       format.json { head :no_content }
     end
+  end
+
+  def about
   end
 end
