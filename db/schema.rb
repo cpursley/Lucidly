@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123212359) do
+ActiveRecord::Schema.define(:version => 20121124151038) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(:version => 20121123212359) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
+
+  create_table "ratings", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "dream_id",   :null => false
+    t.integer  "stars"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "ratings", ["dream_id"], :name => "index_ratings_on_dream_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

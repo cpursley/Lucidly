@@ -8,7 +8,8 @@ Lucidly::Application.routes.draw do
       get 'mydreams'
     end
 
-    resources :comments, :only => [:create, :destroy] 
+    resources :comments, :only => [:create, :destroy]
+    resources :ratings, :only => [:create, :update, :destroy]
   end
 
 

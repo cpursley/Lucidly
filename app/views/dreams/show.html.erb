@@ -1,5 +1,11 @@
 <section id="dreamheader">
-    <h2><%= @dream.title %></h2>
+    <h2>
+        <%= @dream.title %>
+        <ul class="stars floatstars">
+            <li class="yellowstars" style="width: <%= @dream.avg_rating * 25 %>px !important;"></li>
+            <li class="text"><%= @dream.avg_rating %> average from <%= pluralize(@dream.count_ratings, "vote") %></li>
+        </ul>
+    </h2>
     <div class="byline">written by <%= link_to @dream.user.fullname, "" %></div>
       
     <h3><%= @dream.teaser %></h3>
@@ -9,8 +15,28 @@
     <%= @dream.body %>
 </section>
 
-<% # comments for published articles only %>
+<% # comments for published dreams only %>
 <% if @dream.state == 1 %>
+
+    <section id="rating">   
+        <% if user_signed_in? %>
+            <%= form_for [@dream, @rating_currentuser] do |f| %>
+                <div id="ratingbox">
+                    <ul id="ratingbuttons">
+                        <li><%= f.radio_button :stars, "5" %><span>Excellent</span></li>
+                        <li><%= f.radio_button :stars, "4" %><span>Very Good</span></li>
+                        <li><%= f.radio_button :stars, "3" %><span>Good</span></li>
+                        <li><%= f.radio_button :stars, "2" %><span>Average</span></li>
+                        <li><%= f.radio_button :stars, "1" %><span>Poor</span></li>                     
+                    </ul>
+                    <div class="center"><%= f.submit "Rate this dream" %></div>
+                </div>
+            <% end %>
+        <% else %>
+            <div id="ratingbox"><%= link_to "Sign in", new_user_session_path %> to rate this dream</div>
+        <% end %>   
+    </section>
+
     <section id="comments"> 
         <% @comments.each do |comment| %>
             <dream class="comment">      
