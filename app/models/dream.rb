@@ -23,6 +23,14 @@ def avg_rating
   @avg ? @avg : 0
 end
 
+def self.search(search) 
+  if search 
+    where('title LIKE ? or teaser LIKE ?', "%#{search}%", "%#{search}%") 
+  else 
+    scoped 
+  end 
+end
+
   protected
     def record_not_found
       flash[:error] = 'The dream you requested could not be found.'

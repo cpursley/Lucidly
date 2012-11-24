@@ -5,7 +5,7 @@ class DreamsController < ApplicationController
   # GET /dreams
   # GET /dreams.json
   def index
-    @dreams = Dream.where(:state => '1') # published view
+    @dreams = Dream.where(:state => '1').search(params[:search]).order('accepted desc').paginate(:page => params[:page], :per_page => 10)  # published view
 
     respond_to do |format|
       format.html # index.html.erb

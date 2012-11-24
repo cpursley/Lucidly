@@ -10,8 +10,9 @@
             <div class = "teaser"><%= dream.teaser %></div>
         </dream>  
     <% end %>
+
+    <%= will_paginate @dreams %>
+
 </section>
 
 <br />
-
-<%= link_to 'New Dream', new_dream_path %>

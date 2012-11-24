@@ -1,21 +1,36 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Lucidly: A dream journal", '/', id: "logo" %>
+      <%= link_to "Lucidly", '/', id: "logo" %>
       <nav>
         <ul class="nav pull-right">
+            <form class="navbar-search">        
+              <%= form_tag all_dreams_path, :method => 'get' do %> 
+                <%= text_field_tag :search, params[:search] %> 
+              <% end %>
+            </form>
           <li><%= link_to "Dreams", root_path %></li>
-          <li><%= link_to "My Dreams", mydreams_dreams_path %></li>
-          <% if user_signed_in? %> 
-            <li><%= link_to "My Profile", edit_user_registration_path %></li>
-            <li><%= link_to "Sign out", destroy_user_session_path %></li>
-          <% else %>
-            <li><%= link_to "About", about_dreams_path %></li> 
-            <li><%= link_to "Sign up", new_user_registration_path %></li> 
-            <li><%= link_to "Sign in", new_user_session_path %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "My Dreams [" + @num_all_my + "]", mydreams_dreams_path %></li>
+            <li id="fat-menu" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %> <b class="caret"></b></a>
+
+
+              <ul class="dropdown-menu">
+                <li><%= link_to "Profile", edit_user_registration_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to "Sign out", destroy_user_session_path, method: "delete" %></li>
+              <% else %>
+                <li><%= link_to "About", about_dreams_path %></li> 
+                <li><%= link_to "Sign up", new_user_registration_path %></li> 
+                <li><%= link_to "Sign in", new_user_session_path %></li>
           <% end %>
         </ul>
       </nav>
     </div>
   </div>
 </header>
+
+
+
+                <% #submit_tag "Search Dreams", :name => nil, :class => "search-query" %> 
+
