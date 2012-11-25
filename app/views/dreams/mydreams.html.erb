@@ -1,8 +1,8 @@
-<h2>Manage your Dreams</h2>   
+<h2>Manage your dreams</h2>   
     
-<p><%= link_to 'Record a new dream', new_dream_path %></p>
+<p><%= link_to 'Start writing a new dream', new_dream_path %></p>
 
-<section id="mydream">
+<section id="mydreams">
         
     <% if !@mydreams.empty? %>
     
@@ -15,25 +15,37 @@
                     Created / Last updated: <%= dream.created_at.strftime("%B %d, %Y") %> / <%= dream.updated_at.strftime("%B %d, %Y") %>
                 </div>
                         
-                <!-- states:  0...private - 1...published -->                                
+                <!-- the states:  0...draft, 1...submitted, 2...rejected, 3...full dream, 4...featured dream -->                                
                         
                 <% if dream.state == 0 %>     
-                  <div class="state">Current status: Private (visible via direct link)</div>
+                  <div class="state">Current status: Draft (visible via direct link)</div>
                 <% end%>
             
                 <% if dream.state == 1 %>     
-                  <div class="state">Current status: Published (<%= dream.submitted.strftime("%B %d, %Y") %>)</div>
+                  <div class="state">Current status: Submitted (<%= dream.submitted.strftime("%B %d, %Y") %>)</div>
+                <% end%>
+            
+                <% if dream.state == 2 %>     
+                  <div class="state">Current status: Rejected (<%= dream.submitted.strftime("%B %d, %Y") %>)</div>
+                  <div class="reject">Please read the comment, review your dream and submit it again!</div>
+                  <div class="rejectmsg"><%= dream.message %></div>
+                <% end%>
+            
+                <% if dream.state == 3 %>
+                  <div class="state">Current status: Accepted and published as a standard dream (<%= dream.accepted.strftime("%B %d, %Y") %>)</div>
+                <% end %>
+                
+                <% if dream.state == 4 %>
+                  <div class="state">Current status: Accepted and published as a <b>featured dream</b> (<%= dream.accepted.strftime("%B %d, %Y") %>)</div>
                 <% end %>
     
                 <div class="actions">
                     <span class="show"><%= link_to 'View', dream %></span>
                     <span class="edit"><%= link_to 'Edit', edit_dream_path(dream) %></span>
                     <% if (dream.state == 0) or (dream.state == 2) %>
-                        <span><%= link_to "Publish", "#" %></span>
-                        <span class="delete"><%= link_to 'Delete', dream, :confirm => 'Are you sure?', :method => :delete %></span>
+                        <span><%= link_to "Submit now", submit_dream_path(dream), :method => :put %></span>
                     <% end %>
-                    <% if dream.state == 1 %>
-                        <span><%= link_to "Unpublish", "#" %></span>
+                    <% if dream.state < 3 %>
                         <span class="delete"><%= link_to 'Delete', dream, :confirm => 'Are you sure?', :method => :delete %></span>
                     <% end %>
                 </div>
@@ -42,14 +54,7 @@
         <% end %>
 
     <% else %>
-        <p>You have not recorded any dreams yet. Start to contribute: <%= link_to 'New Dream', new_dream_path %></p>
+        <p>You have not written any dreams yet. Start to contribute: <%= link_to 'New dream', new_dream_path %></p>
     <% end %>
 
 </section>
-
-<br>
-To do:
-<br><br>
-Create tabs for All, Published and Private
-<br><br>
-Add Calendar

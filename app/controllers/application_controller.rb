@@ -8,6 +8,15 @@ class ApplicationController < ActionController::Base
   def about
   end
 
+def all
+  @dreams = Dream.where(:state => ['3', '4'])
+  
+  respond_to do |format|
+    format.html { render 'index' }                  
+    format.json  { render :json => @dreams }
+  end
+end
+
   protected
     def count_dreams
       @num_private = Dream.where(:state => '0').count.to_s

@@ -1,0 +1,17 @@
+<section id = "admin">
+<h2>Admin: <%= @state_name.capitalize %> Dreams</h2>  
+
+    <% @dreams.each do |dream| %>
+      <p>
+        <h4><%= link_to dream.title, dream %></h4>
+        Author: <%= dream.user.fullname %> 
+        <%= link_to 'Delete', dream, :confirm => 'This is admin delete despite of the dreams state. Are you sure?', :method => :delete %>
+        
+        <% if dream.state == 1 %> 
+          <%= link_to 'Reject', editreject_admin_path(dream) %>
+          <%= link_to 'Publish standard', accept_admin_path(dream, :value => '0'), :method => :put %>
+          <%= link_to 'Publish featured', accept_admin_path(dream, :value => '1'), :method => :put %>
+        <% end %>
+      </p>
+    <% end %>
+</section>

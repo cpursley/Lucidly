@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <% if @dream.state < 1 %>
+  <% if @dream.state < 3 %>
     <div class="field">
         <label for="dream_title">Title</label><br />
         <%= f.text_field :title, :size => "100%", :class => "fullwidth"  %>

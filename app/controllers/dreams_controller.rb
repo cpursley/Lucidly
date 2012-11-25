@@ -5,7 +5,7 @@ class DreamsController < ApplicationController
   # GET /dreams
   # GET /dreams.json
   def index
-    @dreams = Dream.where(:state => '1').search(params[:search]).order('accepted desc').paginate(:page => params[:page], :per_page => 10)  # published view
+    @dreams = Dream.where(:state => '1').search(params[:search]).order('accepted desc').paginate(:page => params[:page], :per_page => 10)  
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +13,17 @@ class DreamsController < ApplicationController
     end
   end
 
+  def all
+    @dreams = Dream.where(:state => ['3', '4']).paginate(:page => params[:page], :per_page => 10)  
+    
+    respond_to do |format|
+      format.html { render 'index' }                 
+      format.json  { render :json => @dreams }
+    end
+  end
+
   def mydreams
-    @mydreams = Dream.where(:state => ['0', '1']) # published view
+    @mydreams = current_user.dreams.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -76,28 +85,63 @@ class DreamsController < ApplicationController
   # PUT /dreams/1
   # PUT /dreams/1.json
   def update
-    @dream = current_user.dreams.find(params[:id])
+  @dream = current_user.dreams.find(params[:id])
 
-    respond_to do |format|
-      if @dream.update_attributes(params[:dream])
-        format.html { redirect_to @dream, notice: 'Dream was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @dream.errors, status: :unprocessable_entity }
-      end
+  # if an dream has already been accepted, the user is not allowed to change title and teaser
+  if @dream.state > 2
+    params[:dream].delete(:title)
+    params[:dream].delete(:teaser)
+  end
+
+  respond_to do |format|
+    if @dream.update_attributes(params[:dream])
+      format.html { redirect_to(@dream, :notice => 'Dream was successfully updated.') }
+      format.json  { head :ok }
+    else
+      format.html { render :action => "edit" }
+      format.json  { render :json => @dream.errors, :status => :unprocessable_entity }
     end
   end
+end
+
+def submit
+  @dream = current_user.dreams.find(params[:id])
+
+  # submit only, if dream is currently in draft or rejected-state
+  if (@dream.state == 0) or (@dream.state == 2)
+    @dream.state = 1
+    @dream.submitted = Time.now
+
+    if @dream.save
+      flash[:notice] = 'Your dream was successfully submitted for approval.'
+    else
+      flash[:error] = 'There was an error while submitting your dream.'   
+    end           
+  else
+    flash[:error] = 'This dream can not be submitted.'  
+  end
+
+  respond_to do |format|
+    format.html { redirect_to(:action => 'mydreams') }
+    format.json  { head :ok }
+  end
+end
 
   # DELETE /dreams/1
   # DELETE /dreams/1.json
   def destroy
-    @dream = current_user.dreams.find(params[:id])
-    @dream.destroy
+   @dream = current_user.dreams.find(params[:id])
+  
+   # only draft, submitted or rejected dreams can be deleted by the user
+   if (@dream.state < 3)
+     @dream.destroy
+   else
+    flash[:error] = 'The dream could not be deleted.'   
+   end  
 
     respond_to do |format|
       format.html { redirect_to dreams_url }
-      format.json { head :no_content }
+      format.json { head :ok }
     end
   end
 

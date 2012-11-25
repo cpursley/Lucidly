@@ -12,7 +12,7 @@ class Dream < ActiveRecord::Base
   validates :version, :length => { :maximum => 120 }
   validates :changelog, :length => { :maximum => 2000 }
   validates :message, :length => { :maximum => 5000 }
-  validates :state, :presence => true, :numericality => true, :inclusion => { :in => 0..1 }
+  validates :state, :presence => true, :numericality => true, :inclusion => { :in => 0..4 }
 
 def count_ratings
   self.ratings.all.count
