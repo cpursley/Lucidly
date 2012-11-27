@@ -3,10 +3,8 @@
             <ul class="stars floatstars">
                 <li class="yellowstars" style="width: <%= dream.avg_rating * 25 %> px !important;"></li>
             </ul>
-
-            <div class = "title"><%= link_to dream.title, dream %></div>
-            
-            <div class = "byline"><%= dream.created_at.strftime("%B %d, %Y") %> : <%= dream.state %></div>  
+            <div class = "title"><%= link_to dream.title, dream %></div>          
+            <div class = "byline"><%= dream.created_at.strftime("%B %d, %Y") %></div>  
             <div class = "teaser"><%= dream.teaser %></div>
         </dream>  
     <% end %>

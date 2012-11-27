@@ -1,0 +1,31 @@
+<h2>Edit Your Profile</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <p><%= f.label 'name', 'Full Name' %><span>(displayed in your dreams / comments)</span><br />
+  <%= f.text_field :fullname %></p>
+
+  <p><%= f.label 'about', 'About me' %><span>(displayed in your dreams)</span><br />
+  <%= f.text_area :shortbio, :size => "100%x5", :class => "fullwidth" %></p>
+
+  <p><%= f.label 'url', 'Your Homepage or Blog' %><span>(displayed in your dreams / comments)</span><br />
+  <%= f.url_field :weburl %></p>
+
+  <p><%= f.label :password %> <span>(leave blank if you don't want to change it)</span><br />
+  <%= f.password_field :password %></p>
+
+  <p><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></p>
+
+  <p><%= f.label :current_password %> <span>(we need your current password to confirm your changes)</span><br />
+  <%= f.password_field :current_password %></p>
+
+  <div><%= f.submit "Update" %></div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+<%= link_to "Back", :back %>

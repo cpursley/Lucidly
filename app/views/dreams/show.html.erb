@@ -6,7 +6,7 @@
             <li class="text"><%= @dream.avg_rating %> average from <%= pluralize(@dream.count_ratings, "vote") %></li>
         </ul>
     </h2>
-    <div class="byline">written by <%= link_to @dream.user.fullname, "" %></div>
+    <div class="byline">written by <%= @dream.user.fullname %></div>
       
     <h3><%= @dream.teaser %></h3>
 </section>

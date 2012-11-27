@@ -29,7 +29,7 @@ def dreams
 
   # different sort order for different states; verbose the state for the view
   case @state
-    when '0' then @state_name = 'draft'; @order = 'updated_at desc'
+    when '0' then @state_name = 'private'; @order = 'updated_at desc'
     when '1' then @state_name = 'submitted'; @order = 'updated_at desc'
     when '2' then @state_name = 'rejected'; @order = 'updated_at desc'
     when '3' then @state_name = 'accepted'; @order = 'accepted desc'
@@ -56,7 +56,7 @@ def accept
     end  
 
     # freeeeezing!
-    @dream.freezebody = @dream.title + "\n\n" + @dream.teaser + "\n\n" + @dream.body + "\n\n" + @dream.version + "\n\n" + @dream.changelog
+    @dream.freezebody = [@dream.title, @dream.teaser, @dream.body, @dream.version, @dream.changelog].compact.join("\n\n")
     @dream.accepted = Time.now 
 
     # save dream
@@ -88,7 +88,7 @@ def reject
     if params[:dream][:message]
       @dream.state = 2
       @dream.message = params[:dream][:message] 
-      @dream.freezebody = @dream.title + "\n\n" + @dream.teaser + "\n\n" + @dream.body + "\n\n" + @dream.version + "\n\n" + @dream.changelog
+      @dream.freezebody = [@dream.title, @dream.teaser, @dream.body, @dream.version, @dream.changelog].compact.join("\n\n")
   
       if @dream.save
         flash[:notice] = "The artile was rejected."
