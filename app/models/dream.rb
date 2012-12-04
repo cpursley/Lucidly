@@ -14,6 +14,7 @@ class Dream < ActiveRecord::Base
   validates :message, :length => { :maximum => 5000 }
   validates :state, :presence => true, :numericality => true, :inclusion => { :in => 0..4 }
 
+
 def count_ratings
   self.ratings.all.count
 end
@@ -29,6 +30,10 @@ def self.search(search)
   else 
     scoped 
   end 
+end
+
+def self.recent
+  where('created_at > ?', Time.now-30.days.ago).order("created_at desc").first(5)
 end
 
   protected

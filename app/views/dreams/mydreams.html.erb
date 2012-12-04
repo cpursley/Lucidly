@@ -1,60 +1,47 @@
-<h2>Manage your dreams</h2>   
-    
-<p><%= link_to 'Start writing a new dream', new_dream_path %></p>
+<h3><span>Manage your dreams</span></h3>   
 
-<section id="mydreams">
-        
-    <% if !@mydreams.empty? %>
-    
-        <% @mydreams.each do |dream| %>
-    
-            <dream class="mydream">
-        
-                <div class="title"><%= dream.title %></div>
-                <div class="created">
-                    Created / Last updated: <%= dream.created_at.strftime("%B %d, %Y") %> / <%= dream.updated_at.strftime("%B %d, %Y") %>
+<p><%= link_to 'Record new dream', new_dream_path, class: "btn" %></p>
+
+<div class="entry"><% @mydreams.each do |dream| %>
+        <div class="matter">
+            <h2><%= link_to dream.title, dream %></h2>
+                <div class="meta"><i class="icon-calendar"></i> Created: <%= dream.created_at.strftime("%B %d, %Y") %> / Updated: <%= dream.updated_at.strftime("%B %d, %Y") %>
                 </div>
                         
-                <!-- the states:  0...private, 1...submitted, 2...rejected, 3...full dream, 4...featured dream -->                                
+                <!-- the states:  0...private, 1...submitted, 2...rejected, 3...standard dream, 4...featured dream -->                                
                         
                 <% if dream.state == 0 %>     
-                  <div class="state">Current status: Private</div>
+                  <div class="meta"><i class="icon-eye-close"></i> Current status: Private</div>
                 <% end%>
             
                 <% if dream.state == 1 %>     
-                  <div class="state">Current status: Submitted (<%= dream.submitted.strftime("%B %d, %Y") %>)</div>
+                  <div class="meta"><i class="icon-refresh"></i> Current status: Submitted on <%= dream.submitted.strftime("%B %d, %Y") %></div>
                 <% end%>
             
                 <% if dream.state == 2 %>     
-                  <div class="state">Current status: Rejected (<%= dream.submitted.strftime("%B %d, %Y") %>)</div>
-                  <div class="reject">Please read the comment, review your dream and submit it again!</div>
-                  <div class="rejectmsg"><%= dream.message %></div>
+                  <div class="meta"><i class="icon-flag"></i> Current status: Rejected on <%= dream.submitted.strftime("%B %d, %Y") %></div>
+                  <div class="meta"><i class="icon-wrench"></i> Please read the comment, review your dream and submit it again!</div>
+                  <div class="meta"><i class="icon-envelope"></i> <%= dream.message %></div>
                 <% end%>
             
                 <% if dream.state == 3 %>
-                  <div class="state">Current status: Accepted and published as a standard dream (<%= dream.accepted.strftime("%B %d, %Y") %>)</div>
+                  <div class="meta"><i class="icon-thumbs-up"></i> Current status: Accepted and published as a standard dream on<%= dream.accepted.strftime("%B %d, %Y") %></div>
                 <% end %>
                 
                 <% if dream.state == 4 %>
-                  <div class="state">Current status: Accepted and published as a <b>featured dream</b> (<%= dream.accepted.strftime("%B %d, %Y") %>)</div>
+                  <div class="meta"><i class="icon-thumbs-up"></i> Current status: Accepted and published as a <b>featured dream</b> on <%= dream.accepted.strftime("%B %d, %Y") %></div>
                 <% end %>
     
-                <div class="actions">
-                    <span class="show"><%= link_to 'View', dream %></span>
-                    <span class="edit"><%= link_to 'Edit', edit_dream_path(dream) %></span>
+                <div>
+                    <span><%= link_to 'Edit dream', edit_dream_path(dream), class: "btn btn-info" %></span>
                     <% if (dream.state == 0) or (dream.state == 2) %>
-                        <span><%= link_to "Submit now", submit_dream_path(dream), :method => :put %></span>
+                        <span><%= link_to "Submit now", submit_dream_path(dream), :method => :put, class: "btn btn-success" %></span>
                     <% end %>
                     <% if dream.state < 3 %>
-                        <span class="delete"><%= link_to 'Delete', dream, :confirm => 'Are you sure?', :method => :delete %></span>
+                        <span><%= link_to 'Delete', dream, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" %></span>
                     <% end %>
-                </div>
+                </div><br>
                 
-            </dream>  
+            </div>  
         <% end %>
-
-    <% else %>
-        <p>You have not written any dreams yet. Start to contribute: <%= link_to 'New dream', new_dream_path %></p>
-    <% end %>
-
-</section>
+</div>

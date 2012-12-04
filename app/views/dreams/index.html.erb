@@ -1,16 +1,24 @@
-<section id = "dreams">
-    <% @dreams.each do |dream| %>
-            <ul class="stars floatstars">
-                <li class="yellowstars" style="width: <%= dream.avg_rating * 25 %> px !important;"></li>
-            </ul>
-            <div class = "title"><%= link_to dream.title, dream %></div>          
-            <div class = "byline"><%= dream.created_at.strftime("%B %d, %Y") %></div>  
-            <div class = "teaser"><%= dream.teaser %></div>
-        </dream>  
+<h3><span><%= controller.action_name.capitalize %> dreams</span></h3>
+    <div class="entry"><% @dreams.each do |dream| %>
+        <div class="matter">
+            <h2><%= link_to dream.title, dream %></h2>         
+            <div class="meta"><i class="icon-calendar"></i> <%= dream.created_at.strftime("%B %d, %Y") %> - <i class="icon-folder-open"></i> tag, tag - <i class="icon-comment"></i><%= dream.comments.count %></div> 
+            <p><%= dream.teaser %></p>
+            </br>
+        </div>
     <% end %>
+
+        
+    </div>
+
 
     <%= will_paginate @dreams %>
 
-</section>
+    </div>
 
-<br />
+    <div class="span4">
+        <%= render 'layouts/sidebar' %>
+    </div>
+
+
+

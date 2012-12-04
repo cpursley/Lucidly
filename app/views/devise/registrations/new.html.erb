@@ -1,21 +1,18 @@
-<h2>Sign up</h2>
+<div class="comments well">
+  <h3><span class="comment-heading">Sign Up</span></h3>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
 
-  <div><%= f.label :fullname %><br />
-  <%= f.text_field :fullname %></div>
+  <%= f.input :email %>
+  <%= f.input :fullname %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Sign up" %></div>
+  <div><%= f.submit "Sign up", class: "btn"  %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+</div>

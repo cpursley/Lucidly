@@ -1,0 +1,32 @@
+         <div class="span4">
+            <!-- Sidebar -->
+               <div class="sidebar">
+                  <!-- Widget -->
+                  <div class="widget">
+                     <h3><span>Search</span></h3>
+                     <div class="form">
+                        <%= form_tag all_dreams_path, :method => 'get' do %> 
+                          <%= text_field_tag :search, params[:search] %>
+                          <%= submit_tag "Search", :name => 'nil', :class => "btn" %> 
+                        <% end %>
+                     </div>
+                  </div>
+                  
+                  <div class="widget">
+                     <h3><span>Recent</span></h3>
+                     <ul>
+                        <% @recent_dreams.each do |dream| %>
+                           <li><%= link_to dream.title, dream_path(dream) %></li>         
+                        <% end %>
+                     </ul>
+                  </div>
+                  
+                  <div class="widget">
+                     <h3><span>Tags</span></h3>
+                     <ul>
+                        <li>still need to set tags up - railscast?</li>
+                     </ul>
+                  </div>
+               </div>
+         </div>
+

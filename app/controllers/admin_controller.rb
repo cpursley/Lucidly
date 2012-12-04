@@ -11,8 +11,6 @@ def index
   @num_published = @num_state3 + @num_state4
   
   @num_users = User.all.count
-  @num_users_active30days = User.where('last_sign_in_at > ?', 30.days.ago).count
-  @num_users_created30days = User.where('created_at > ?', 30.days.ago).count
 end
 
 def dreams
@@ -43,7 +41,7 @@ end
 def accept
   @dream = Dream.find(params[:id])
 
-  # only submitted dreams can be accepted
+  # submit dream to be accepted
   if @dream.state == 1
     @dream.state = 3
     flash[:notice] = 'The dream has been accepted.'
