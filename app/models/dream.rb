@@ -3,8 +3,10 @@ class Dream < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :ratings, :dependent => :destroy 
 
-  attr_accessible :title, :teaser, :body, :version, :changelog, :user_id, :message, :freezebody, :state, :submitted, :accepted
+  attr_accessible :title, :teaser, :body, :version, :changelog, :user_id, :message, :freezebody, :state, :submitted, :accepted, :tag_list
  
+  acts_as_taggable
+
   validates :user_id, :presence => true
   validates :title, :presence => true, :length => { :maximum => 80 }
   validates :teaser, :presence => true, :length => { :maximum => 500 }

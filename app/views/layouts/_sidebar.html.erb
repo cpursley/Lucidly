@@ -1,7 +1,7 @@
          <div class="span4">
-            <!-- Sidebar -->
+            
                <div class="sidebar">
-                  <!-- Widget -->
+                  
                   <div class="widget">
                      <h3><span>Search</span></h3>
                      <div class="form">
@@ -24,9 +24,13 @@
                   <div class="widget">
                      <h3><span>Tags</span></h3>
                      <ul>
-                        <li>still need to set tags up - railscast?</li>
+                        <div id="tag_cloud"><% tag_cloud Dream.tag_counts, %w{s m l} do |tag, css_class| %>
+                              <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+                            <% end %>
+                        </div>
                      </ul>
                   </div>
                </div>
          </div>
+
 

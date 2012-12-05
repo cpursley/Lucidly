@@ -353,6 +353,14 @@ border-bottom:1px solid #fafafa;
 margin-bottom:10px;
 }
 
+#tag_cloud {
+  width: 400px;
+  line-height: 1.6em;
+  .s { font-size: 0.6em; }
+  .m { font-size: 1.0em; }
+  .l { font-size: 1.6em; }
+}
+
 /* Pagination */
 
 .pagination {

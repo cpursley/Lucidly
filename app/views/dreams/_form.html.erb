@@ -12,18 +12,19 @@
 
   <% if @dream.state < 3 %>
 
-  <%= f.input :title %>
-  <%= f.input :teaser %>
+  <%= f.input :title, :label => 'Title' %>
+  <%= f.input :teaser, :label => 'Teaser - dream summary' %>
 
 
   <% else %>
 
-  <%= f.input :title %>
-  <%= f.input :teaser %>
+  <%= f.input :title, :label => 'Title' %>
+  <%= f.input :teaser, :label => 'Teaser - dream summary' %>
 
   <% end %>
 
-  <%= f.input :body %>
+  <%= f.input :body, :label => 'Body - dream details' %>
+  <%= f.input :tag_list, :label => 'Tags - seperate using comma' %>
 
   <div>
     <%= f.submit "Submit", class: "btn" %>

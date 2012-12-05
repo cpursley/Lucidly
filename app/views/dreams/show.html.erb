@@ -6,6 +6,7 @@
             <div class="comment-author"><strong>By <%=@dream.user.fullname %></strong></div><br>
 
             <p><%= @dream.body %></p>
+            <p><%= raw @dream.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
         </div>
     </div>             
 

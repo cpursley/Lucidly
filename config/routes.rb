@@ -26,6 +26,7 @@ Lucidly::Application.routes.draw do
     resources :ratings, :only => [:create, :update, :destroy]
   end
 
+  get 'tags/:tag', to: 'dreams#index', as: :tag
 
   root :to => "dreams#index"
 
