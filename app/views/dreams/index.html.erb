@@ -2,9 +2,8 @@
     <div class="entry"><% @dreams.each do |dream| %>
         <div class="matter">
             <h2><%= link_to dream.title, dream %></h2>         
-            <div class="meta"><i class="icon-calendar"></i> <%= dream.created_at.strftime("%B %d, %Y") %> - <i class="icon-folder-open"></i> tag, tag - <i class="icon-comment"></i><%= dream.comments.count %></div> 
+            <div class="meta"><i class="icon-calendar"></i> <%= dream.created_at.strftime("%B %d, %Y") %> - <i class="icon-folder-open"></i> <%= raw dream.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %> - <i class="icon-comment"></i><%= dream.comments.count %></div> 
             <p><%= dream.teaser %></p>
-            <p><%= raw dream.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
             </br>
         </div>
     <% end %>

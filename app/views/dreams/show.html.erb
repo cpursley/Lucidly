@@ -2,11 +2,10 @@
 
     <div class="entry">
         <div class="matter">
-            <div class="meta"><i class="icon-calendar"></i><%= @dream.created_at.strftime("%B %d, %Y") %> - <i class="icon-folder-open"></i> tag, tag - <i class="icon-comment"></i><%= @dream.comments.count %></div>
+            <div class="meta"><i class="icon-calendar"></i><%= @dream.created_at.strftime("%B %d, %Y") %> - <i class="icon-folder-open"></i> <%= raw @dream.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %> - <i class="icon-comment"></i><%= @dream.comments.count %></div>
             <div class="comment-author"><strong>By <%=@dream.user.fullname %></strong></div><br>
 
             <p><%= @dream.body %></p>
-            <p><%= raw @dream.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></p>
         </div>
     </div>             
 
