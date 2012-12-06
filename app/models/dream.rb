@@ -1,7 +1,6 @@
 class Dream < ActiveRecord::Base
   belongs_to :user
   has_many :comments, :dependent => :destroy
-  has_many :ratings, :dependent => :destroy 
 
   attr_accessible :title, :teaser, :body, :version, :changelog, :user_id, :message, :freezebody, :state, :submitted, :accepted, :tag_list
  
@@ -16,15 +15,6 @@ class Dream < ActiveRecord::Base
   validates :message, :length => { :maximum => 5000 }
   validates :state, :presence => true, :numericality => true, :inclusion => { :in => 0..4 }
 
-
-def count_ratings
-  self.ratings.all.count
-end
-
-def avg_rating
-  @avg = self.ratings.average(:stars)     
-  @avg ? @avg : 0
-end
 
 def self.search(search) 
   if search 
