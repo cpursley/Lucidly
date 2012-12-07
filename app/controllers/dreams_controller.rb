@@ -17,7 +17,7 @@ class DreamsController < ApplicationController
   end
 
   def all
-    @dreams = Dream.where(:state => ['3', '4']).search(params[:search]).order('accepted desc').paginate(:page => params[:page])
+    @dreams = Dream.where(:state => ['3', '4']).search(params[:search]).order('accepted desc').paginate(:page => params[:page], :per_page => 8)
     @recent_dreams = Dream.recent
     @loved_dreams = Dream.loved
 
@@ -92,7 +92,6 @@ class DreamsController < ApplicationController
   def update
   @dream = current_user.dreams.find(params[:id])
 
-  # if an dream has already been accepted, the user is not allowed to change title and teaser
   if @dream.state > 2
     params[:dream].delete(:title)
     params[:dream].delete(:teaser)
@@ -137,7 +136,6 @@ end
   def destroy
    @dream = current_user.dreams.find(params[:id])
   
-   # only draft, submitted or rejected dreams can be deleted by the user
    if (@dream.state < 3)
      @dream.destroy
    else

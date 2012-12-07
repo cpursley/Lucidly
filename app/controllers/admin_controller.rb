@@ -16,16 +16,13 @@ end
 def dreams
   if params[:state]    
     @state = params[:state]
-    # invalid parameter? show submitted dreams
     if !['0', '1', '2', '3', '4'].index(@state)
       @state = '1'
     end
   else
-    # no parameter? show submitted dreams
     @state = '1'
   end  
 
-  # different sort order for different states; verbose the state for the view
   case @state
     when '0' then @state_name = 'private'; @order = 'updated_at desc'
     when '1' then @state_name = 'submitted'; @order = 'updated_at desc'
@@ -37,11 +34,9 @@ def dreams
   @dreams = Dream.where(:state => @state).order(@order)      
 end
 
-# accept an dream as normal or featured dream
 def accept
   @dream = Dream.find(params[:id])
 
-  # submit dream to be accepted
   if @dream.state == 1
     @dream.state = 3
     flash[:notice] = 'The dream has been accepted.'
@@ -53,11 +48,9 @@ def accept
       end  
     end  
 
-    # freeeeezing!
     @dream.freezebody = [@dream.title, @dream.teaser, @dream.body, @dream.version, @dream.changelog].compact.join("\n\n")
     @dream.accepted = Time.now 
 
-    # save dream
     if !@dream.save
       flash[:notice] = 'There was an error while accepting the dream.'
     end
@@ -68,17 +61,14 @@ def accept
   redirect_to :action => 'dreams', :state => 1
 end
 
-# display form to enter reject message
 def editreject
    @dream = Dream.find(params[:id])
-   # only submitted dreams can be rejected
    if @dream.state != 1
      flash[:notice] = 'Only submitted dreams can be rejected.'
      redirect_to :action => 'dreams', :state => 1 
    end
 end
 
-# reject the dream (updates the dream)
 def reject
   @dream = Dream.find(params[:id])
 

@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     respond_to do |format|
-      if @dream.state == 1
+      if @dream.state > 2
         if @comment.save
           format.html { redirect_to(@dream, :notice => 'Your comment was successfully saved.') }
         else
