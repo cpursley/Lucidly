@@ -7,6 +7,7 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem "validate_url"
 gem 'simple_form'
 gem 'acts-as-taggable-on'
+gem 'activerecord-reputation-system', require: 'reputation_system'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

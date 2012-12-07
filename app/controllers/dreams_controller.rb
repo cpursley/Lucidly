@@ -7,6 +7,8 @@ class DreamsController < ApplicationController
   def index
     @dreams = Dream.where(:state => '4').paginate(:page => params[:page], :per_page => 8)
     @recent_dreams = Dream.recent
+    @loved_dreams = Dream.loved
+
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,8 +17,10 @@ class DreamsController < ApplicationController
   end
 
   def all
-    @dreams = Dream.where(:state => ['3', '4']).search(params[:search]).order('accepted desc').paginate(:page => params[:page], :per_page => 8)
+    @dreams = Dream.where(:state => ['3', '4']).search(params[:search]).order('accepted desc').paginate(:page => params[:page])
     @recent_dreams = Dream.recent
+    @loved_dreams = Dream.loved
+
     
     respond_to do |format|
       format.html { render 'index' }                 
@@ -146,7 +150,12 @@ end
     end
   end
 
-
+def vote
+  value = params[:type] == "up" ? 1 : -1
+  @dream = Dream.find(params[:id])
+  @dream.add_or_update_evaluation(:votes, value, current_user)
+  redirect_to :back, notice: "Thank you for voting!"
+end
 
   def about
   end

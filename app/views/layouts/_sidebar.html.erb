@@ -22,6 +22,15 @@
                   </div>
                   
                   <div class="widget">
+                     <h3><span>Most Loved</span></h3>
+                     <ul>
+                        <% @loved_dreams.each do |dream| %>
+                           <li><%= link_to dream.title, dream_path(dream) %></li>         
+                        <% end %>
+                     </ul>
+                  </div>
+
+                  <div class="widget">
                      <h3><span>Tags</span></h3>
                      <ul>
                         <div id="tag_cloud"><% tag_cloud Dream.tag_counts, %w{s m l} do |tag, css_class| %>
