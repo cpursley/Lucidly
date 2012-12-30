@@ -17,21 +17,38 @@ class Dream < ActiveRecord::Base
   validates :message, :length => { :maximum => 5000 }
   validates :state, :presence => true, :numericality => true, :inclusion => { :in => 0..4 }
 
-def self.search(search) 
-  if search 
-    where('title LIKE ? or teaser LIKE ?', "%#{search}%", "%#{search}%") 
-  else 
-    scoped 
-  end 
-end
+  scope :featured, where(state: '4')
+  scope :standard, where(state: '3')
+  scope :rejected, where(state: '2')
+  scope :submitted, where(state: '1')
+  scope :pvt, where(state: '0')
+  scope :published, where("state = '3' or state = '4'")
 
-def self.recent
-  where('created_at > ?', Time.now-30.days.ago).order("created_at desc").first(5)
-end
+  def self.states
+    { featured:  Dream.featured.count,
+      standard: Dream.standard.count, 
+      rejected: Dream.rejected.count, 
+      submitted: Dream.submitted.count, 
+      pvt: Dream.pvt.count,
+      published: Dream.published.count
+    }
+  end
 
-def self.loved
-  find_with_reputation(:votes, :all, {:order => 'votes DESC'}).first(5)
-end
+  def self.search(search) 
+    if search 
+      where('title LIKE ? or teaser LIKE ?', "%#{search}%", "%#{search}%") 
+    else 
+      scoped 
+    end 
+  end
+
+  def self.recent
+    where('created_at > ?', Time.now-30.days.ago).order("created_at desc").first(5)
+  end
+
+  def self.loved
+    find_with_reputation(:votes, :all, {:order => 'votes DESC'}).first(5)
+  end
 
   protected
     def record_not_found

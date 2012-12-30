@@ -3,14 +3,10 @@ class AdminController < ApplicationController
   before_filter :is_admin
 
 def index
-  @num_state0 = Dream.where(:state => '0').count
-  @num_state1 = Dream.where(:state => '1').count
-  @num_state2 = Dream.where(:state => '2').count
-  @num_state3 = Dream.where(:state => '3').count
-  @num_state4 = Dream.where(:state => '4').count
-  @num_published = @num_state3 + @num_state4
-  
+  @states = Dream.states
   @num_users = User.all.count
+  @num_users_active30days = User.where('last_sign_in_at > ?', 30.days.ago).count
+  @num_users_created30days = User.where('created_at > ?', 30.days.ago).count
 end
 
 def dreams
@@ -41,12 +37,8 @@ def accept
     @dream.state = 3
     flash[:notice] = 'The dream has been accepted.'
     
-    if params[:value]
-      if params[:value] == '1'
-        @dream.state = 4
-        flash[:notice] = 'The dream has been accepted as a featured dream.'
-      end  
-    end  
+    @dream.state = 4
+    flash[:notice] = 'The dream has been accepted as a featured dream.'  
 
     @dream.freezebody = [@dream.title, @dream.teaser, @dream.body, @dream.version, @dream.changelog].compact.join("\n\n")
     @dream.accepted = Time.now 
@@ -95,12 +87,7 @@ def reject
 end
 
   protected
-    def is_admin
-      if current_user
-        if current_user.id == 1
-          return 1
-        end
-      end
-      redirect_to root_url
+    def redirect_unless_admin
+      redirect_to root_url unless current_user.try(:admin?)
     end
 end

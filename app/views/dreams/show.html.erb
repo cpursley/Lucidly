@@ -10,8 +10,6 @@
         </div>
     </div>             
 
-<% #if @dream.state == 1 %>
-
     <div class="comments well">
         <h3><span class="comment-heading">Comments - <%= @dream.comments.count %></span></h3>
         <% @comments.each do |comment| %>
@@ -25,7 +23,7 @@
                         </div>
                     </div>
                 </div>
-                <% # delete link only for comments written by this particular user %>
+
                 <% if user_signed_in? and comment.user_id == current_user.id %>
                     <span><%= link_to 'delete', dream_comment_path(@dream, comment), :confirm => 'Are you sure?', :method => :delete, :class => "" %></span>
                 <% end %> 
@@ -52,13 +50,13 @@
                             </div>          
                         <% end %>
  
-                <% #else %>
+                <% else %>
                     <div class="signin">
                         Please <%= link_to "sign in", new_user_session_path %> before posting a comment.
                     </div>
                 <% end %>
         </dream>
     </section>
-<% #end %>
+
 
 

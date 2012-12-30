@@ -15,4 +15,9 @@ attr_accessible :email, :password, :password_confirmation, :remember_me, :fullna
   validates :weburl, :url => {:allow_blank => true}, :length => { :maximum => 50 }
   validates :fullname, :length => { :maximum => 40 }
   validates :shortbio, :length => { :maximum => 500 }
+
+  def admin?
+    self.id == 1
+  end
+
 end

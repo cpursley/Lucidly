@@ -1,0 +1,29 @@
+BootStrap License:
+------------------
+
+BootStrap is licensed under Apache License, Version 2.0. For more information visit the below link.
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+============================================================
+
+jQuery License:
+---------------
+
+jQuery is licensed under MIT License & GPL Lincense. For more information visit the below link.
+
+http://jquery.org/license/
+
+=============================================================
+
+WordPress License:
+------------------
+
+Visit this page for WordPress License - http://wordpress.org/about/license/
+
+=============================================================
+
+Plugins, Images, iCons, etc., used in this template is copyrighted to respective owners and it comes under their License. 
+
+=============================================================
+
