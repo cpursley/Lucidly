@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(:version => 20121206132352) do
     t.datetime "updated_at",                :null => false
   end
 
+  add_index "dreams", ["user_id"], :name => "index_dreams_on_user_id"
+
   create_table "ratings", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "dream_id",   :null => false
