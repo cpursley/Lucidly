@@ -42,9 +42,9 @@ class Dream < ActiveRecord::Base
     end 
   end
 
-  def self.recent
-    where('created_at > ?', Time.now-30.days.ago).order("created_at desc").first(5)
-  end
+#  def self.recent
+#    where('created_at > ?', Time.now-30.days.ago).order("created_at desc").first(5)
+#  end
 
   def self.loved
     find_with_reputation(:votes, :all, {:order => 'votes DESC'}).first(5)

@@ -6,7 +6,7 @@ class DreamsController < ApplicationController
   # GET /dreams.json
   def index
     @dreams = Dream.where(:state => '4').paginate(:page => params[:page], :per_page => 8)
-    @recent_dreams = Dream.recent
+    #@recent_dreams = Dream.recent
     @loved_dreams = Dream.loved
 
 
