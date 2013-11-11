@@ -29,8 +29,9 @@ Before using lucidly you will need Git, Ruby, Rails & PostgreSQL installed.
 git clone git@github.com:cpursley/Lucidly.git
 cd lucidly
 bundle install
-rake db:create:all
+rake db:create
 rake db:migrate
+rake db:seed
 rails server
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser.
