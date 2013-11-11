@@ -1,5 +1,6 @@
 class RatingsController < ApplicationController
   before_filter :authenticate_user!
+  #before_filter :admin?
   
   def create
     @dream = Dream.find(params[:dream_id])

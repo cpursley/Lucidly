@@ -4,7 +4,7 @@ User.delete_all
 Dream.delete_all
 
 # Admin User
-@user1 = User.create! :email => 'chasepursley@gmail.com', :password => '123123123', :fullname => 'Chase Pursley'
+@user1 = User.create! admin: true, email: 'chasepursley@gmail.com', password: '123123123', fullname: 'Chase Pursley'
 @user1.save!
 
 # Users
