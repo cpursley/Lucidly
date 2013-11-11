@@ -7,7 +7,7 @@ Lucidly: A Dream Journal
 
 ### What
 
-A place to record your lucid dreams.
+A place to record and publish your lucid dreams.
 
 ### Technology
 
@@ -29,6 +29,7 @@ Before using lucidly you will need Git, Ruby, Rails & PostgreSQL installed.
 git clone git@github.com:cpursley/Lucidly.git
 cd lucidly
 bundle install
+rake db:create:all
 rake db:migrate
 rails server
 ```
