@@ -4,28 +4,28 @@ User.delete_all
 Dream.delete_all
 
 # Admin User
-@user1 = User.create! admin: true, email: 'chasepursley@gmail.com', password: '123123123', fullname: 'Chase Pursley'
+@user1 = User.create! email: 'usera@gmail.com', password: '123123123', fullname: 'User A'
 @user1.save!
 
 # Users
 @users = [
   {
-  email: 'usera@gmail.com', 
-  password: '123123123', 
-  fullname: 'User A',
-  },
-  {
-  email: 'userb@gmail.com', 
+  email: 'userB@gmail.com', 
   password: '123123123', 
   fullname: 'User B',
   },
   {
-  email: 'userc@gmail.com', 
+  email: 'userC@gmail.com', 
   password: '123123123', 
   fullname: 'User C',
   },
   {
-  email: 'userd@gmail.com', 
+  email: 'userD@gmail.com', 
+  password: '123123123', 
+  fullname: 'User D',
+  },
+  {
+  email: 'userE@gmail.com', 
   password: '123123123', 
   fullname: 'User D',
   }
