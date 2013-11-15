@@ -1,33 +1,29 @@
 # User Seeds
-
+=begin
 User.delete_all
 Dream.delete_all
-
-# Admin User
-@user1 = User.create! email: 'usera@gmail.com', password: '123123123', fullname: 'User A'
-@user1.save!
 
 # Users
 @users = [
   {
-  email: 'userB@gmail.com', 
+  email: 'usera@gmail.com', 
   password: '123123123', 
-  fullname: 'User B',
+  fullname: 'User a',
   },
   {
-  email: 'userC@gmail.com', 
+  email: 'userb@gmail.com', 
   password: '123123123', 
-  fullname: 'User C',
+  fullname: 'User b',
   },
   {
-  email: 'userD@gmail.com', 
+  email: 'userc@gmail.com', 
   password: '123123123', 
-  fullname: 'User D',
+  fullname: 'User c',
   },
   {
-  email: 'userE@gmail.com', 
+  email: 'userd@gmail.com', 
   password: '123123123', 
-  fullname: 'User D',
+  fullname: 'User d',
   }
 ]
 
@@ -51,3 +47,4 @@ create_users()
 @dream4.save!
 @dream5 = @user1.dreams.create! :title => 'Dream 5', :state => 4, :message => '', :version => 'Version Info', :changelog => 'Changelog', :submitted => Time.now, :accepted => Time.now + 5.day, :teaser => "Dream 5 Teaser", :body => "Dream 5 Body"
 @dream5.save!
+=end

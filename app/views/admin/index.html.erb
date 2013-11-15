@@ -3,7 +3,7 @@
     <h3>Dreams</h3> 
         <div class="meta"><i class="icon-signal"></i>
             Statistics:  
-            <%=pluralize(@states[:published], "total published dreams")%>, 
+            <%= pluralize(@states[:published], "total published dreams")%>, 
             <%= link_to pluralize(@states[:featured], "featured dream"), dreams_admin_index_path + '?state=4' %>, 
             <%= link_to pluralize(@states[:standard], "standard dream"), dreams_admin_index_path + '?state=3' %>, 
             <%= link_to pluralize(@states[:rejected], "rejected dream"), dreams_admin_index_path + '?state=2' %>, 
