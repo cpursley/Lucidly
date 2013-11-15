@@ -18,7 +18,7 @@ class DreamsController < ApplicationController
 
   def all
     @dreams = Dream.where(:state => ['3', '4']).search(params[:search]).order('accepted desc').paginate(:page => params[:page], :per_page => 8)
-    @recent_dreams = Dream.recent
+    #@recent_dreams = Dream.recent
     @loved_dreams = Dream.loved
 
     
@@ -148,13 +148,19 @@ end
     end
   end
 
-def vote
-  value = params[:type] == "up" ? 1 : -1
-  @dream = Dream.find(params[:id])
-  @dream.add_or_update_evaluation(:votes, value, current_user)
-  redirect_to :back, notice: "Thank you for voting!"
-end
+  def vote
+    value = params[:type] == "up" ? 1 : -1
+    @dream = Dream.find(params[:id])
+    @dream.add_or_update_evaluation(:votes, value, current_user)
+    redirect_to :back, notice: "Thank you for voting!"
+  end
 
   def about
   end
+  
+  protected
+    def record_not_found
+      flash[:error] = 'The dream you requested could not be found.'
+      redirect_to root_url
+    end
 end

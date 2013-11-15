@@ -1,11 +1,8 @@
 class Dream < ActiveRecord::Base
   belongs_to :user
   has_many :comments, :dependent => :destroy
-
   attr_accessible :title, :teaser, :body, :version, :changelog, :user_id, :message, :freezebody, :state, :submitted, :accepted, :tag_list
- 
   acts_as_taggable
-
   has_reputation :votes, source: :user, aggregated_by: :sum
 
   validates :user_id, :presence => true
@@ -25,7 +22,7 @@ class Dream < ActiveRecord::Base
   scope :published, where("state = '3' or state = '4'")
 
   def self.states
-    { featured:  Dream.featured.count,
+    { featured: Dream.featured.count,
       standard: Dream.standard.count, 
       rejected: Dream.rejected.count, 
       submitted: Dream.submitted.count, 
@@ -43,7 +40,7 @@ class Dream < ActiveRecord::Base
   end
 
   def self.recent
-    where('created_at = true', Time.now-30.days.ago).order("created_at desc").first(5)
+    where('created_at', Time.now-30.days.ago).order("created_at desc").first(5)
   end
 
   def self.loved

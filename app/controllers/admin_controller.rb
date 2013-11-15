@@ -94,8 +94,5 @@ end
       end
     end
     redirect_to root_url
-  end
-    #def redirect_unless_admin
-      #redirect_to root_url unless current_user.try(:admin?)
-    #end 
+  end 
 end
