@@ -14,5 +14,4 @@ class User < ActiveRecord::Base
   validates :weburl, :url => {:allow_blank => true}, :length => { :maximum => 50 }
   validates :fullname, :length => { :maximum => 40 }
   validates :shortbio, :length => { :maximum => 500 }
-
 end

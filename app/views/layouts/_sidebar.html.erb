@@ -15,9 +15,9 @@
                   <div class="widget">
                      <h3><span>Recent</span></h3>
                      <ul>
-                        <%# @recent_dreams.each do |dream| %>
-                           <li><%#= link_to dream.title, dream_path(dream) %></li>         
-                        <%# end %>
+                        <% @recent_dreams.each do |dream| %>
+                           <li><%= link_to dream.title, dream_path(dream) %></li>         
+                        <% end %>
                      </ul>
                   </div>
                   

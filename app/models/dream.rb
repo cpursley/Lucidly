@@ -40,7 +40,7 @@ class Dream < ActiveRecord::Base
   end
 
   def self.recent
-    where('created_at', Time.now-30.days.ago).order("created_at desc").first(5)
+    where("created_at >git = to_timestamp(?)", Time.now-30.days.ago).order("created_at desc").first(5)
   end
 
   def self.loved

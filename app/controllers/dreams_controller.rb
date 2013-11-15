@@ -6,9 +6,8 @@ class DreamsController < ApplicationController
   # GET /dreams.json
   def index
     @dreams = Dream.where(:state => '4').paginate(:page => params[:page], :per_page => 8)
-    #@recent_dreams = Dream.recent
+    @recent_dreams = Dream.recent
     @loved_dreams = Dream.loved
-
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,9 +17,8 @@ class DreamsController < ApplicationController
 
   def all
     @dreams = Dream.where(:state => ['3', '4']).search(params[:search]).order('accepted desc').paginate(:page => params[:page], :per_page => 8)
-    #@recent_dreams = Dream.recent
+    @recent_dreams = Dream.recent
     @loved_dreams = Dream.loved
-
     
     respond_to do |format|
       format.html { render 'index' }                 
@@ -90,46 +88,45 @@ class DreamsController < ApplicationController
   # PUT /dreams/1
   # PUT /dreams/1.json
   def update
-  @dream = current_user.dreams.find(params[:id])
-
-  if @dream.state > 2
-    params[:dream].delete(:title)
-    params[:dream].delete(:teaser)
-  end
-
-  respond_to do |format|
-    if @dream.update_attributes(params[:dream])
-      format.html { redirect_to(@dream, :notice => 'Dream was successfully updated.') }
-      format.json  { head :ok }
-    else
-      format.html { render :action => "edit" }
-      format.json  { render :json => @dream.errors, :status => :unprocessable_entity }
+    @dream = current_user.dreams.find(params[:id])
+  
+    if @dream.state > 2
+      params[:dream].delete(:title)
+      params[:dream].delete(:teaser)
+    end
+  
+    respond_to do |format|
+      if @dream.update_attributes(params[:dream])
+        format.html { redirect_to(@dream, :notice => 'Dream was successfully updated.') }
+        format.json  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.json  { render :json => @dream.errors, :status => :unprocessable_entity }
+      end
     end
   end
-end
 
-def submit
-  @dream = current_user.dreams.find(params[:id])
+  def submit
+    @dream = current_user.dreams.find(params[:id])
 
-  # submit only, if dream is currently in draft or rejected-state
-  if (@dream.state == 0) or (@dream.state == 2)
-    @dream.state = 1
-    @dream.submitted = Time.now
-
-    if @dream.save
-      flash[:notice] = 'Your dream was successfully submitted for approval.'
+    if (@dream.state == 0) or (@dream.state == 2)
+      @dream.state = 1
+      @dream.submitted = Time.now
+  
+      if @dream.save
+        flash[:notice] = 'Your dream was successfully submitted for approval.'
+      else
+        flash[:error] = 'There was an error while submitting your dream.'   
+      end           
     else
-      flash[:error] = 'There was an error while submitting your dream.'   
-    end           
-  else
-    flash[:error] = 'This dream can not be submitted.'  
+      flash[:error] = 'This dream can not be submitted.'  
+    end
+  
+    respond_to do |format|
+      format.html { redirect_to(:action => 'mydreams') }
+      format.json  { head :ok }
+    end
   end
-
-  respond_to do |format|
-    format.html { redirect_to(:action => 'mydreams') }
-    format.json  { head :ok }
-  end
-end
 
   # DELETE /dreams/1
   # DELETE /dreams/1.json

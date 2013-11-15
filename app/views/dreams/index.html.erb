@@ -1,24 +1,22 @@
-<h3><span><%= controller.action_name.capitalize %> dreams</span></h3>
-    <div class="entry"><% @dreams.each do |dream| %>
-        <div class="matter">
-            <h2><%= link_to dream.title, dream %></h2>         
-            <div class="meta"><i class="icon-calendar"></i> <%= dream.created_at.strftime("%B %d, %Y") %> - <i class="icon-tags"></i> <%= raw dream.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %> - <i class="icon-comment"></i> <%= dream.comments.count %> - <i class="icon-heart"></i> <%= dream.reputation_for(:votes).to_i %></div> 
-            <p><%= dream.teaser %></p>
-            </br>
-        </div>
-    <% end %>
+<h3><span><%= @dreams.count %> dreams</span></h3>
 
-        
+<div class="entry"><% @dreams.each do |dream| %>
+    <div class="matter">
+        <h2><%= link_to dream.title, dream %></h2>         
+        <div class="meta"><i class="icon-calendar"></i> <%= dream.created_at.strftime("%B %d, %Y") %> - <i class="icon-tags"></i> <%= raw dream.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %> - <i class="icon-comment"></i> <%= dream.comments.count %> - <i class="icon-heart"></i> <%= dream.reputation_for(:votes).to_i %></div> 
+        <p><%= dream.teaser %></p>
+        </br>
     </div>
+<% end %>  
+</div>
 
 
-    <%= will_paginate @dreams %>
+<%= will_paginate @dreams %>
+</div>
 
-    </div>
-
-    <div class="span4">
-        <%= render 'layouts/sidebar' %>
-    </div>
+<div class="span4">
+  <%= render 'layouts/sidebar' %>
+</div>
 
 
 

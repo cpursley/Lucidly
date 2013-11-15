@@ -1,5 +1,4 @@
-<h3><span>Manage your dreams</span></h3>   
-
+<h3><span>Manage your (<%=@mydreams.count %>) dreams</span></h3>   
 <p><%= link_to 'Record new dream', new_dream_path, class: "btn" %></p>
 
 <div class="entry"><% @mydreams.each do |dream| %>
@@ -7,9 +6,7 @@
             <h2><%= link_to dream.title, dream %></h2>
                 <div class="meta"><i class="icon-calendar"></i> Created: <%= dream.created_at.strftime("%B %d, %Y") %> / Updated: <%= dream.updated_at.strftime("%B %d, %Y") %>
                 </div>
-                        
-                <!-- the states:  0...private, 1...submitted, 2...rejected, 3...standard dream, 4...featured dream -->                                
-                        
+
                 <% if dream.state == 0 %>     
                   <div class="meta"><i class="icon-eye-close"></i> Current status: Private</div>
                 <% end%>
