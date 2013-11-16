@@ -1,4 +1,4 @@
-<h3><span>Manage your (<%=@mydreams.count %>) dreams</span></h3>   
+<h3><span>Manage your (<%= @mydreams_total %>) dreams</span></h3>   
 <p><%= link_to 'Record new dream', new_dream_path, class: "btn" %></p>
 
 <div class="entry"><% @mydreams.each do |dream| %>
@@ -38,8 +38,9 @@
                         <span><%= link_to 'Delete', dream, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" %></span>
                     <% end %>
                 </div><br>
-            </div>  
-        <% end %>
+      </div>
+<% end %>
 </div>
+        
 <%= will_paginate @mydreams %>
 </div>

@@ -34,7 +34,8 @@ class DreamsController < ApplicationController
 
   def mydreams
     @mydreams = current_user.dreams.all.paginate(:page => params[:page], :per_page => 5)
-
+    @mydreams_total = current_user.dreams.all.count
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @mydreams }
