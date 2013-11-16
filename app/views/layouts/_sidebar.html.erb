@@ -7,7 +7,7 @@
                      <div class="form">
                         <%= form_tag all_dreams_path, :method => 'get' do %> 
                           <%= text_field_tag :search, params[:search] %>
-                          <%= submit_tag "Search", :name => 'nil', :class => "btn" %> 
+                          <%= submit_tag "Search", :name => 'nil', :class => "btn" %>
                         <% end %>
                      </div>
                   </div>
@@ -16,16 +16,16 @@
                      <h3><span>Recent</span></h3>
                      <ul>
                         <% @recent_dreams.each do |dream| %>
-                           <li><%= link_to dream.title, dream_path(dream) %></li>         
+                          <li><%= link_to dream.title, dream_path(dream) %></li>         
                         <% end %>
                      </ul>
                   </div>
-                  
+               
                   <div class="widget">
                      <h3><span>Loved</span></h3>
                      <ul>
                         <% @loved_dreams.each do |dream| %>
-                           <li><%= link_to dream.title, dream_path(dream) %></li>         
+                          <li><%= link_to dream.title, dream_path(dream) %></li>
                         <% end %>
                      </ul>
                   </div>
