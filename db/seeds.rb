@@ -1,32 +1,22 @@
-# User Seeds
-
 User.delete_all
 Dream.delete_all
 
 # Admin User
 puts "Seeding Admin..."
-user = User.create! email: 'chasepursley@gmail.com', password: '123123123', fullname: 'Chase Pursley'
-user.save!
+@user1 = User.create! email: 'admin@admin.com', password: '123123123', fullname: 'Admin User'
+@user1.save!
+puts "Admin email: admin@admin.com"
+puts "Admin password: 123123123"
+puts "Admin view route domain.com/admin"
 
-puts "Seeding Users..."
-# Users
-5.times do |i|
-  User.create! email: "user#{i}@user#{i}.com", password: '123123123', fullname: 'User #{i}'
-  user.save!
-end
+# Author User
+puts "Seeding Author..."
+@user2 = User.create!email: 'author@author.com', password: '123123123', fullname: 'Dream Author'
+@user2.save!
 
-=begin
+# Dreams
 puts "Seeding Dreams..."
-# Dreams ~ refactor into hash at some point. Maybe use a factory...
-@dream1 = @user2.dreams.create! :title => 'Dream 1', :state => 0, :message => '', :version => 'Version Info', :changelog => 'Changelog', :submitted => Time.now, :accepted => Time.now + 1.day, :teaser => "Dream 1 Teaser", :body => "Dream 1 Body"
-@dream1.save!
-
-@dream2 = @user1.dreams.create! :title => 'Dream 2', :state => 1, :message => '', :version => 'Version Info', :changelog => 'Changelog', :submitted => Time.now, :accepted => Time.now + 2.day, :teaser => "Dream 2 Teaser", :body => "Dream 2 Body"
-@dream2.save!
-@dream3 = @user1.dreams.create! :title => 'Dream 3', :state => 2, :message => '', :version => 'Version Info', :changelog => 'Changelog', :submitted => Time.now, :accepted => Time.now + 3.day, :teaser => "Dream 3 Teaser", :body => "Dream 3 Body"
-@dream3.save!
-@dream4 = @user1.dreams.create! :title => 'Dream 4', :state => 3, :message => '', :version => 'Version Info', :changelog => 'Changelog', :submitted => Time.now, :accepted => Time.now + 4.day, :teaser => "Dream 4 Teaser", :body => "Dream 4 Body"
-@dream4.save!
-@dream5 = @user1.dreams.create! :title => 'Dream 5', :state => 4, :message => '', :version => 'Version Info', :changelog => 'Changelog', :submitted => Time.now, :accepted => Time.now + 5.day, :teaser => "Dream 5 Teaser", :body => "Dream 5 Body"
-@dream5.save!
-=end
+40.times do |i|
+  d = @user2.dreams.create! :title => "Dream #{i}", :state => (rand(0..4)), :message => "", :version => "Version #{i} Info", :changelog => "Changelog #{i}", :submitted => Time.now, :accepted => Time.now + 1.day, :teaser => "Dream #{i} Teaser", :body => "Dream #{i} Body"
+  d.save!
+end

@@ -44,7 +44,7 @@ class Dream < ActiveRecord::Base
   end
 
   def self.loved
-    find_with_reputation(:votes, :all, {:conditions => ["value >= ?", 5], :order => "votes DESC"}).first(5)
+    find_with_reputation(:votes, :all, {:conditions => ["value >= ?", 1], :order => "votes DESC"}).first(5)
   end
 
   protected
