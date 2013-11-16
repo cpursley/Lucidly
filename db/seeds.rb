@@ -1,29 +1,35 @@
 # User Seeds
-=begin
+
 User.delete_all
 Dream.delete_all
 
+# Admin User
+puts "Seeding Admin..."
+user = User.create! :email => 'chasepursley@gmail.com', :password => '123123123', :fullname => 'Chase Pursley'
+user.save!
+
+puts "Seeding Users..."
 # Users
 @users = [
   {
   email: 'usera@gmail.com', 
   password: '123123123', 
-  fullname: 'User a',
+  fullname: 'User A',
   },
   {
   email: 'userb@gmail.com', 
   password: '123123123', 
-  fullname: 'User b',
+  fullname: 'User B',
   },
   {
   email: 'userc@gmail.com', 
   password: '123123123', 
-  fullname: 'User c',
+  fullname: 'User C',
   },
   {
   email: 'userd@gmail.com', 
   password: '123123123', 
-  fullname: 'User d',
+  fullname: 'User D',
   }
 ]
 
@@ -35,7 +41,7 @@ def create_users
 end
 
 create_users()
-  
+=begin
 # Dreams ~ refactor into hash at some point. Maybe use a factory...
 @dream1 = @user1.dreams.create! :title => 'Dream 1', :state => 0, :message => '', :version => 'Version Info', :changelog => 'Changelog', :submitted => Time.now, :accepted => Time.now + 1.day, :teaser => "Dream 1 Teaser", :body => "Dream 1 Body"
 @dream1.save!
