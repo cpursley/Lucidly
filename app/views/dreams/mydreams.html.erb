@@ -38,7 +38,8 @@
                         <span><%= link_to 'Delete', dream, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger" %></span>
                     <% end %>
                 </div><br>
-                
             </div>  
         <% end %>
+</div>
+<%= will_paginate @mydreams %>
 </div>

@@ -33,7 +33,7 @@ class DreamsController < ApplicationController
   end
 
   def mydreams
-    @mydreams = current_user.dreams.all
+    @mydreams = current_user.dreams.all.paginate(:page => params[:page], :per_page => 5)
 
     respond_to do |format|
       format.html # index.html.erb
