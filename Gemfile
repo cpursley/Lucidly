@@ -5,6 +5,7 @@ gem 'pg'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
+  gem 'capybara', '2.1.0'
 end
 
 gem 'sass-rails',   '~> 3.2.3'
