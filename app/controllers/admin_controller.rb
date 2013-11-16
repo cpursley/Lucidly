@@ -26,7 +26,7 @@ class AdminController < ApplicationController
       when '3' then @state_name = 'accepted'; @order = 'accepted desc'
       when '4' then @state_name = 'featured'; @order = 'accepted desc'
     end
-    @dreams = Dream.where(:state => @state).order(@order)      
+    @dreams = Dream.where(:state => @state).order(@order).paginate(:page => params[:page], :per_page => 10)      
   end
   
   def accept
