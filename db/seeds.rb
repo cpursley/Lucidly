@@ -5,46 +5,22 @@ Dream.delete_all
 
 # Admin User
 puts "Seeding Admin..."
-user = User.create! :email => 'chasepursley@gmail.com', :password => '123123123', :fullname => 'Chase Pursley'
+user = User.create! email: 'chasepursley@gmail.com', password: '123123123', fullname: 'Chase Pursley'
 user.save!
 
 puts "Seeding Users..."
 # Users
-@users = [
-  {
-  email: 'usera@gmail.com', 
-  password: '123123123', 
-  fullname: 'User A',
-  },
-  {
-  email: 'userb@gmail.com', 
-  password: '123123123', 
-  fullname: 'User B',
-  },
-  {
-  email: 'userc@gmail.com', 
-  password: '123123123', 
-  fullname: 'User C',
-  },
-  {
-  email: 'userd@gmail.com', 
-  password: '123123123', 
-  fullname: 'User D',
-  }
-]
-
-def create_users
-  @users.each do |hash|
-    u = User.create hash
-    u.save!
-  end
+5.times do |i|
+  User.create! email: "user#{i}@user#{i}.com", password: '123123123', fullname: 'User #{i}'
+  user.save!
 end
 
-create_users()
 =begin
+puts "Seeding Dreams..."
 # Dreams ~ refactor into hash at some point. Maybe use a factory...
-@dream1 = @user1.dreams.create! :title => 'Dream 1', :state => 0, :message => '', :version => 'Version Info', :changelog => 'Changelog', :submitted => Time.now, :accepted => Time.now + 1.day, :teaser => "Dream 1 Teaser", :body => "Dream 1 Body"
+@dream1 = @user2.dreams.create! :title => 'Dream 1', :state => 0, :message => '', :version => 'Version Info', :changelog => 'Changelog', :submitted => Time.now, :accepted => Time.now + 1.day, :teaser => "Dream 1 Teaser", :body => "Dream 1 Body"
 @dream1.save!
+
 @dream2 = @user1.dreams.create! :title => 'Dream 2', :state => 1, :message => '', :version => 'Version Info', :changelog => 'Changelog', :submitted => Time.now, :accepted => Time.now + 2.day, :teaser => "Dream 2 Teaser", :body => "Dream 2 Body"
 @dream2.save!
 @dream3 = @user1.dreams.create! :title => 'Dream 3', :state => 2, :message => '', :version => 'Version Info', :changelog => 'Changelog', :submitted => Time.now, :accepted => Time.now + 3.day, :teaser => "Dream 3 Teaser", :body => "Dream 3 Body"
