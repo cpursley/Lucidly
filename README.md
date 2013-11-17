@@ -9,13 +9,17 @@ Lucidly: A Dream Journal
 
 A place to record and publish your lucid dreams.
 
+### Where
+
+Live at: [http://lucidly.herokuapp.com/](http://lucidly.herokuapp.com/)
+
 ### Technology
 
 * Ruby on Rails 3.2.8
 * PostgreSQL
 * Heroku
 * CoffeeScript
-* Twitter Bootstrap
+* Twitter Bootstrap (custom theme)
 * Simple Form
 * Acts as Taggable
 * Active Record Reputation System
