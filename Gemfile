@@ -7,6 +7,7 @@ gem 'rails_12factor'
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
   gem 'capybara', '2.1.0'
+  gem 'factory_girl_rails', '4.2.1'
 end
 
 gem 'sass-rails',   '~> 3.2.3'

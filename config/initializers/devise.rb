@@ -231,4 +231,6 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = "/my_engine/users/auth"
   
   config.secret_key = 'b5a62863b3dfb979d52c736c4d34af4d74de6f6ea9403189787fc32ddece0681d90afb0805baa33e8ceda2e6a6cf979093d665bb22b69c74de179e6a592f3cb9'          
+
+  config.stretches = Rails.env.test? ? 1 : 10
 end
