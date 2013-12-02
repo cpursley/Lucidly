@@ -22,13 +22,10 @@ Lucidly::Application.routes.draw do
       put 'submit'
     end
     member { post :vote }
-
     resources :comments, :only => [:create, :destroy]
-
   end
 
   get 'tags/:tag', to: 'dreams#index', as: :tag
-
   root :to => "dreams#index"
 
 end
