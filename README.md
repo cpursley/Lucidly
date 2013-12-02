@@ -1,5 +1,6 @@
 Lucidly: A Dream Journal
 ===========
+[![Code Climate](https://codeclimate.com/github/cpursley/Lucidly.png)](https://codeclimate.com/github/cpursley/Lucidly)
 
 <center>![lucid dream](http://nidradreaming.com/files/2012/12/things-to-do-in-lucid-dream.jpg)</center>
 
