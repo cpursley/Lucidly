@@ -16,12 +16,13 @@ group :development, :test do
 end
 
 gem 'sass-rails'
+gem 'bootstrap-sass', '~> 2.3.2'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'uglifier'
-gem 'bootstrap-sass'
-gem 'will_paginate'
-gem 'bootstrap-will_paginate'
 gem "validate_url"
 gem 'simple_form'
 gem 'acts-as-taggable-on'

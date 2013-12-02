@@ -25,6 +25,12 @@ Live at: [http://lucidly.herokuapp.com/](http://lucidly.herokuapp.com/)
 * Active Record Reputation System
 * Devise
 
+### Contributors
+
+* [Chase Pursley](http://github.com/cpursley) ~ (repo/app creator)
+* [Al Snow](https://github.com/jasnow) ~ (snow-ize and several issues)
+* [Ho-Sheng Hsiao](https://github.com/hosh) ~ (scope refactor recommendations)
+
 ### Getting started
 
 Before using lucidly you will need Git, Ruby, Rails & PostgreSQL installed.
@@ -33,9 +39,12 @@ Before using lucidly you will need Git, Ruby, Rails & PostgreSQL installed.
 git clone git@github.com:cpursley/Lucidly.git
 cd lucidly
 bundle install
+rake db:setup
+--or--
 rake db:create
 rake db:migrate
 rake db:seed
+-- --
 rails server
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser.

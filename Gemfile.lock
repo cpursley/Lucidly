@@ -34,7 +34,7 @@ GEM
     arel (3.0.3)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
-    bootstrap-sass (3.0.2.1)
+    bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.6)
       will_paginate
@@ -170,7 +170,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-reputation-system
   acts-as-taggable-on
-  bootstrap-sass
+  bootstrap-sass (~> 2.3.2)
   bootstrap-will_paginate
   capybara
   coffee-rails
