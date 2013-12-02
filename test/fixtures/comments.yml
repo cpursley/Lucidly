@@ -2,10 +2,10 @@
 
 one:
   user_id: 1
-  article_id: 1
+  dream_id: 1
   body: MyString
 
 two:
   user_id: 1
-  article_id: 1
+  dream_id: 1
   body: MyString
