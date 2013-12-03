@@ -20,6 +20,8 @@ class Dream < ActiveRecord::Base
   scope :submitted, where(state: '1')
   scope :pvt, where(state: '0')
   scope :published, where("state = '3' or state = '4'")
+  scope :recent, where("created_at >= to_timestamp(?)", Time.now-30.days.ago).order("created_at desc").first(5)
+  scope :loved, find_with_reputation(:votes, :all, {:conditions => ["value >= ?", 1], :order => "votes DESC"}).first(5)
 
   def self.states
     { featured: Dream.featured.count,
@@ -30,21 +32,13 @@ class Dream < ActiveRecord::Base
       published: Dream.published.count
     }
   end
-
+  
   def self.search(search) 
     if search 
       where('title LIKE ? or teaser LIKE ?', "%#{search}%", "%#{search}%") 
     else 
       scoped 
     end 
-  end
-
-  def self.recent
-    where("created_at >= to_timestamp(?)", Time.now-30.days.ago).order("created_at desc").first(5)
-  end
-
-  def self.loved
-    find_with_reputation(:votes, :all, {:conditions => ["value >= ?", 1], :order => "votes DESC"}).first(5)
   end
 
   protected
