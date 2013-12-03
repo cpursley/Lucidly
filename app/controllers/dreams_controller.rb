@@ -5,7 +5,7 @@ class DreamsController < ApplicationController
   # GET /dreams
   # GET /dreams.json
   def index
-    @dreams = Dream.where(:state => '4').paginate(:page => params[:page], :per_page => 8)
+    @dreams = Dream.featured.paginate(:page => params[:page], :per_page => 8)
     @recent_dreams = Dream.recent
     @loved_dreams = Dream.loved
 
@@ -16,7 +16,7 @@ class DreamsController < ApplicationController
   end
 
   def all
-    @dreams = Dream.where(:state => ['3', '4']).search(params[:search]).order('accepted desc').paginate(:page => params[:page], :per_page => 8)
+    @dreams = Dream.published.search(params[:search]).order('accepted desc').paginate(:page => params[:page], :per_page => 8)
     @recent_dreams = Dream.recent
     @loved_dreams = Dream.loved
     
