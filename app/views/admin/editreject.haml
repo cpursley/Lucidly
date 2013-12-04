@@ -1,0 +1,23 @@
+%section#admin
+  %h4= link_to @dream.title, @dream
+  Author: #{@dream.user.fullname}
+  %br/
+  = @dream.teaser
+  %br/
+  %br/
+  %br/
+  = form_for(@dream, :url => reject_admin_path(@dream)) do |f|
+    - if @dream.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@dream.errors.count, "error")
+          prohibited this dream from being saved:
+        %ul
+          - @dream.errors.full_messages.each do |msg|
+            %li= msg
+    .field
+      %label{:for => "dream_message"} Reject message
+      %br/
+      = f.text_area :message, :size => "100%x10", :class => "fullwidth"
+    .actions
+      = f.submit "Reject Dream"

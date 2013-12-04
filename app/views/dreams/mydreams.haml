@@ -1,0 +1,47 @@
+%h3
+  %span
+    Manage your (#{@mydreams_total}) dreams
+%p= link_to 'Record new dream', new_dream_path, class: "btn"
+.entry
+  - @mydreams.each do |dream|
+    .matter
+      %h2= link_to dream.title, dream
+      .meta
+        %i.icon-calendar
+        Created: #{dream.created_at.strftime("%B %d, %Y")} / Updated: #{dream.updated_at.strftime("%B %d, %Y")}
+      - if dream.state == 0
+        .meta
+          %i.icon-eye-close
+          Current status: Private
+      - if dream.state == 1
+        .meta
+          %i.icon-refresh
+          Current status: Submitted on #{dream.submitted.strftime("%B %d, %Y")}
+      - if dream.state == 2
+        .meta
+          %i.icon-flag
+          Current status: Rejected on #{dream.submitted.strftime("%B %d, %Y")}
+        .meta
+          %i.icon-wrench
+          Please read the comment, review your dream and submit it again!
+        .meta
+          %i.icon-envelope
+          = dream.message
+      - if dream.state == 3
+        .meta
+          %i.icon-thumbs-up
+          Current status: Accepted and published as a standard dream on#{dream.accepted.strftime("%B %d, %Y")}
+      - if dream.state == 4
+        .meta
+          %i.icon-thumbs-up
+          Current status: Accepted and published as a
+          %b featured dream
+          on #{dream.accepted.strftime("%B %d, %Y")}
+      %div
+        %span= link_to 'Edit dream', edit_dream_path(dream), class: "btn btn-info"
+        - if (dream.state == 0) or (dream.state == 2)
+          %span= link_to "Submit now", submit_dream_path(dream), :method => :put, class: "btn btn-success"
+        - if dream.state < 3
+          %span= link_to 'Delete', dream, :confirm => 'Are you sure?', :method => :delete, class: "btn btn-danger"
+      %br
+= will_paginate @mydreams

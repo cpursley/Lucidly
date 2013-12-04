@@ -1,0 +1,25 @@
+%h3
+  %span
+    = @dreams.count
+    dreams
+.span8
+  .entry
+    - @dreams.each do |dream|
+      .matter
+        %h2= link_to dream.title, dream
+        .meta
+          %i.icon-calendar
+          = dream.created_at.strftime("%B %d, %Y")
+          \-
+          %i.icon-tags
+          = raw dream.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+          \-
+          %i.icon-comment
+          = dream.comments.count
+          \-
+          %i.icon-heart
+          = dream.reputation_for(:votes).to_i
+        %p= dream.teaser
+.span4
+  = render 'layouts/sidebar'
+= will_paginate @dreams

@@ -15,6 +15,7 @@ group :development, :test do
   gem 'simplecov', :require => false
 end
 
+gem "haml-rails"
 gem 'sass-rails'
 gem 'bootstrap-sass', '~> 2.3.2'
 gem 'will_paginate'

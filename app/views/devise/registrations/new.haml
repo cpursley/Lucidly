@@ -1,0 +1,11 @@
+.comments.well
+  %h3
+    %span.comment-heading Sign Up
+  = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    = devise_error_messages!
+    = f.input :email
+    = f.input :fullname
+    = f.input :password
+    = f.input :password_confirmation
+    %div= f.submit "Sign up", class: "btn"
+  = render "devise/shared/links"

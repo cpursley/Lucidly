@@ -67,6 +67,13 @@ GEM
     factory_girl_rails (4.3.0)
       factory_girl (~> 4.3.0)
       railties (>= 3.0.0)
+    haml (4.0.4)
+      tilt
+    haml-rails (0.4)
+      actionpack (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+      haml (>= 3.1, < 4.1)
+      railties (>= 3.1, < 4.1)
     hike (1.2.3)
     i18n (0.6.8)
     journey (1.0.4)
@@ -176,6 +183,7 @@ DEPENDENCIES
   coffee-rails
   devise
   factory_girl_rails
+  haml-rails
   jquery-rails
   pg
   rails (= 3.2.16)
