@@ -72,7 +72,7 @@ class AdminController < ApplicationController
         @dream.freezebody = [@dream.title, @dream.teaser, @dream.body, @dream.version, @dream.changelog].compact.join("\n\n")
     
         if @dream.save
-          flash[:notice] = "The artile was rejected."
+          flash[:notice] = "The dream was rejected."
           redirect_to :action => 'dreams', :state => 1
         else
           render :action => "editreject"
