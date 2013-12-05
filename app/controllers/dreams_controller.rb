@@ -152,9 +152,6 @@ class DreamsController < ApplicationController
     @dream.add_or_update_evaluation(:votes, value, current_user)
     redirect_to :back, notice: "Thank you for voting!"
   end
-
-  def about
-  end
   
   protected
     def record_not_found
