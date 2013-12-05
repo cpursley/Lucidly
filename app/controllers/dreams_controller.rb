@@ -16,7 +16,7 @@ class DreamsController < ApplicationController
   end
 
   def all
-    @dreams = Dream.published.search(params[:search]).order('accepted desc').paginate(:page => params[:page], :per_page => 8)
+    @dreams = Dream.published.search(params[:query]).order('accepted desc').paginate(:page => params[:page], :per_page => 8)
     @recent_dreams = Dream.recent
     @loved_dreams = Dream.loved
     

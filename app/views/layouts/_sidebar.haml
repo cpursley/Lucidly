@@ -4,9 +4,9 @@
       %h3
         %span Search
       .form-search
-        = form_tag all_dreams_path, :method => 'get' do
-          = text_field_tag :search, params[:search]
-          = submit_tag "Search", :name => 'nil', :class => "btn"
+        = form_tag all_dreams_path, method: :get do
+          = text_field_tag :query, params[:query]
+          = submit_tag "Search", name: nil, class: "btn"
     .widget
       %h3
         %span Recent

@@ -1,7 +1,8 @@
 class Dream < ActiveRecord::Base
+  attr_accessible :title, :teaser, :body, :version, :changelog, :user_id, :message, :freezebody, :state, :submitted, :accepted, :tag_list
   belongs_to :user
   has_many :comments, :dependent => :destroy
-  attr_accessible :title, :teaser, :body, :version, :changelog, :user_id, :message, :freezebody, :state, :submitted, :accepted, :tag_list
+
   acts_as_taggable
   has_reputation :votes, source: :user, aggregated_by: :sum
 
@@ -33,12 +34,12 @@ class Dream < ActiveRecord::Base
     }
   end
   
-  def self.search(search) 
-    if search 
-      where('title LIKE ? or teaser LIKE ?', "%#{search}%", "%#{search}%") 
-    else 
-      scoped 
-    end 
+  def self.search(query)
+    if query.present?
+      where("title @@ :q or teaser @@ :q or body @@ :q", q: query)
+    else
+      scoped
+    end
   end
 
   protected
