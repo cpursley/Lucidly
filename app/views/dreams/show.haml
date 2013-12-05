@@ -1,60 +1,61 @@
-%h3
-  %span= @dream.title
-.entry
-  .matter
-    .meta
-      %i.icon-calendar
-      = @dream.created_at.strftime("%B %d, %Y")
-      \-
-      %i.icon-comment
-      = @dream.comments.count
-      \-
-      %i.icon-heart
-      = @dream.reputation_for(:votes).to_i
-      %i.icon-tags
-      = raw @dream.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
-    .comment-author
-      %strong
-        By #{@dream.user.fullname}
-    %br
-      %p= @dream.body
-    .meta
-      %i.icon-heart
-      = pluralize @dream.reputation_for(:votes).to_i, "vote"
-      | #{link_to "up", vote_dream_path(@dream, type: "up"), method: "post"}
-.comments.well
+.span12
   %h3
-    %span.comment-heading
-      Comments - #{@dream.comments.count}
-  - @comments.each do |comment|
-    .media-list
-      #li-comment-6.comment.byuser.comment-author-admin.bypostauthor.even.thread-even.depth-1
-        #comment-6.comment-box
-          .comment-author
-            %strong= comment.user.fullname
-          .cmeta
-            = time_ago_in_words(comment.created_at)
-            ago
-          .clearfix
-          %p= comment.body
-    - if user_signed_in? and comment.user_id == current_user.id
-      %span= link_to 'delete', dream_comment_path(@dream, comment), :confirm => 'Are you sure?', :method => :delete, :class => ""
-%br
+    %span= @dream.title
+  .entry
+    .matter
+      .meta
+        %i.icon-calendar
+        = @dream.created_at.strftime("%B %d, %Y")
+        \-
+        %i.icon-comment
+        = @dream.comments.count
+        \-
+        %i.icon-heart
+        = @dream.reputation_for(:votes).to_i
+        %i.icon-tags
+        = raw @dream.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+      .comment-author
+        %strong
+          By #{@dream.user.fullname}
+      %br
+        %p= @dream.body
+      .meta
+        %i.icon-heart
+        = pluralize @dream.reputation_for(:votes).to_i, "vote"
+        | #{link_to "up", vote_dream_path(@dream, type: "up"), method: "post"}
   .comments.well
     %h3
-      %span.comment-heading leave a comment
-    - if user_signed_in?
-      - if current_user.fullname == nil or current_user.fullname == ''
-        .comment-author
-          %strong
-            Please complete your #{link_to "profile", edit_user_registration_path} before posting comments.
+      %span.comment-heading
+        Comments - #{@dream.comments.count}
+    - @comments.each do |comment|
+      .media-list
+        #li-comment-6.comment.byuser.comment-author-admin.bypostauthor.even.thread-even.depth-1
+          #comment-6.comment-box
+            .comment-author
+              %strong= comment.user.fullname
+            .cmeta
+              = time_ago_in_words(comment.created_at)
+              ago
+            .clearfix
+            %p= comment.body
+      - if user_signed_in? and comment.user_id == current_user.id
+        %span= link_to 'delete', dream_comment_path(@dream, comment), :confirm => 'Are you sure?', :method => :delete, :class => ""
+  %br
+    .comments.well
+      %h3
+        %span.comment-heading leave a comment
+      - if user_signed_in?
+        - if current_user.fullname == nil or current_user.fullname == ''
+          .comment-author
+            %strong
+              Please complete your #{link_to "profile", edit_user_registration_path} before posting comments.
+        - else
+          .comment-author
+            %strong= current_user.fullname
+          %br
+            = simple_form_for [@dream, current_user.comments.new] do |f|
+              = f.text_area :body
+              %div= f.submit "Add Comment", class: "btn"
       - else
-        .comment-author
-          %strong= current_user.fullname
-        %br
-          = simple_form_for [@dream, current_user.comments.new] do |f|
-            = f.text_area :body
-            %div= f.submit "Add Comment", class: "btn"
-    - else
-      .signin
-        Please #{link_to "sign in", new_user_session_path} before posting a comment.
+        .signin
+          Please #{link_to "sign in", new_user_session_path} before posting a comment.

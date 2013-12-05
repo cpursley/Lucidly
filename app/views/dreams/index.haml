@@ -1,9 +1,10 @@
-%h3
-  %span
-    = @dreams.count
-    dreams
+.span12
+  %h3
+    %span
+      = @dreams.count
+      dreams
 .span8
-  .entry
+  .posts
     - @dreams.each do |dream|
       .matter
         %h2= link_to dream.title, dream
@@ -20,6 +21,7 @@
           %i.icon-tags
           = raw dream.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
         %p= dream.teaser
+    = will_paginate @dreams
 .span4
-  = render 'layouts/sidebar'
-= will_paginate @dreams
+  .sidebar
+    = render 'sidebar'
