@@ -15,15 +15,15 @@ class CommentsController < ApplicationController
         end
       else
         format.html { redirect_to(@dream, :notice => 'Comments are limited to published dreams.') }
-      end  
+      end
     end
   end
-  
+
   def destroy
     @comment = current_user.comments.find(params[:id])
     @dream = Dream.find(params[:dream_id])
     @comment.destroy
-    
+
     respond_to do |format|
       format.html { redirect_to @dream }
     end

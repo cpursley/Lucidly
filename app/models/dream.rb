@@ -26,14 +26,14 @@ class Dream < ActiveRecord::Base
 
   def self.states
     { featured: Dream.featured.count,
-      standard: Dream.standard.count, 
-      rejected: Dream.rejected.count, 
-      submitted: Dream.submitted.count, 
+      standard: Dream.standard.count,
+      rejected: Dream.rejected.count,
+      submitted: Dream.submitted.count,
       pvt: Dream.pvt.count,
       published: Dream.published.count
     }
   end
-  
+
   def self.search(query)
     if query.present?
       where("title @@ :q or teaser @@ :q or body @@ :q", q: query)
@@ -46,5 +46,5 @@ class Dream < ActiveRecord::Base
     def record_not_found
       flash[:error] = 'The dream you requested could not be found.'
       redirect_to root_url
-    end  
+    end
 end
