@@ -1,7 +1,7 @@
 class DreamsController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :all, :show, :about]
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  
+
   # GET /dreams
   # GET /dreams.json
   def index
@@ -19,9 +19,9 @@ class DreamsController < ApplicationController
     @dreams = Dream.published.search(params[:query]).order('accepted desc').paginate(:page => params[:page], :per_page => 8)
     @recent_dreams = Dream.recent
     @loved_dreams = Dream.loved
-    
+
     respond_to do |format|
-      format.html { render 'index' }                 
+      format.html { render 'index' }
       format.json  { render :json => @dreams }
     end
 
@@ -35,7 +35,7 @@ class DreamsController < ApplicationController
   def mydreams
     @mydreams = current_user.dreams.all.paginate(:page => params[:page], :per_page => 5)
     @mydreams_total = current_user.dreams.all.count
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @mydreams }
@@ -58,7 +58,7 @@ class DreamsController < ApplicationController
   # GET /dreams/new.json
   def new
     @dream = current_user.dreams.new
-    
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @dream }
@@ -90,12 +90,12 @@ class DreamsController < ApplicationController
   # PUT /dreams/1.json
   def update
     @dream = current_user.dreams.find(params[:id])
-  
+
     if @dream.state > 2
       params[:dream].delete(:title)
       params[:dream].delete(:teaser)
     end
-  
+
     respond_to do |format|
       if @dream.update_attributes(params[:dream])
         format.html { redirect_to(@dream, :notice => 'Dream was successfully updated.') }
@@ -113,16 +113,16 @@ class DreamsController < ApplicationController
     if (@dream.state == 0) or (@dream.state == 2)
       @dream.state = 1
       @dream.submitted = Time.now
-  
+
       if @dream.save
         flash[:notice] = 'Your dream was successfully submitted for approval.'
       else
-        flash[:error] = 'There was an error while submitting your dream.'   
-      end           
+        flash[:error] = 'There was an error while submitting your dream.'
+      end
     else
-      flash[:error] = 'This dream can not be submitted.'  
+      flash[:error] = 'This dream can not be submitted.'
     end
-  
+
     respond_to do |format|
       format.html { redirect_to(:action => 'mydreams') }
       format.json  { head :ok }
@@ -133,12 +133,12 @@ class DreamsController < ApplicationController
   # DELETE /dreams/1.json
   def destroy
    @dream = current_user.dreams.find(params[:id])
-  
+
    if (@dream.state < 3)
      @dream.destroy
    else
-    flash[:error] = 'The dream could not be deleted.'   
-   end  
+    flash[:error] = 'The dream could not be deleted.'
+   end
 
     respond_to do |format|
       format.html { redirect_to dreams_url }
@@ -152,7 +152,7 @@ class DreamsController < ApplicationController
     @dream.add_or_update_evaluation(:votes, value, current_user)
     redirect_to :back, notice: "Thank you for voting!"
   end
-  
+
   protected
     def record_not_found
       flash[:error] = 'The dream you requested could not be found.'

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Users" do
-  
+
   subject { page }
 =begin
   describe "User Signup" do
@@ -17,7 +17,7 @@ describe "Users" do
     end
     it "should have the title 'sign up'" do
       expect(page).to have_title(user.name)
-    end    
+    end
   end
 =end
 end

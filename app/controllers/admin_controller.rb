@@ -8,17 +8,17 @@ class AdminController < ApplicationController
     @num_users_active30days = User.where('last_sign_in_at > ?', 30.days.ago).count
     @num_users_created30days = User.where('created_at > ?', 30.days.ago).count
   end
-  
+
   def dreams
-    if params[:state]    
+    if params[:state]
       @state = params[:state]
       if !['0', '1', '2', '3', '4'].index(@state)
         @state = '1'
       end
     else
       @state = '1'
-    end  
-  
+    end
+
     case @state
       when '0' then @state_name = 'private'; @order = 'updated_at desc'
       when '1' then @state_name = 'submitted'; @order = 'updated_at desc'
@@ -26,12 +26,12 @@ class AdminController < ApplicationController
       when '3' then @state_name = 'accepted'; @order = 'accepted desc'
       when '4' then @state_name = 'featured'; @order = 'accepted desc'
     end
-    @dreams = Dream.where(:state => @state).order(@order).paginate(:page => params[:page], :per_page => 10)      
+    @dreams = Dream.where(:state => @state).order(@order).paginate(:page => params[:page], :per_page => 10)
   end
-  
+
   def accept
     @dream = Dream.find(params[:id])
-  
+
     if @dream.state == 1
       @dream.state = 3
       flash[:notice] = 'The dream has been accepted.'
@@ -39,12 +39,12 @@ class AdminController < ApplicationController
         if params[:value] == '1'
           @dream.state = 4
           flash[:notice] = 'The dream has been accepted as a featured dream'
-        end  
-      end      
-  
+        end
+      end
+
       @dream.freezebody = [@dream.title, @dream.teaser, @dream.body, @dream.version, @dream.changelog].compact.join("\n\n")
-      @dream.accepted = Time.now 
-  
+      @dream.accepted = Time.now
+
       if !@dream.save
         flash[:notice] = 'There was an error while accepting the dream.'
       end
@@ -52,31 +52,31 @@ class AdminController < ApplicationController
       flash[:notice] = 'Only submitted dreams can be published.'
     end
     redirect_to :action => 'dreams', :state => 1
-  end    
-        
+  end
+
   def editreject
      @dream = Dream.find(params[:id])
      if @dream.state != 1
        flash[:notice] = 'Only submitted dreams can be rejected.'
-       redirect_to :action => 'dreams', :state => 1 
+       redirect_to :action => 'dreams', :state => 1
      end
   end
-  
+
   def reject
     @dream = Dream.find(params[:id])
-  
+
     if @dream.state == 1
       if params[:dream][:message]
         @dream.state = 2
-        @dream.message = params[:dream][:message] 
+        @dream.message = params[:dream][:message]
         @dream.freezebody = [@dream.title, @dream.teaser, @dream.body, @dream.version, @dream.changelog].compact.join("\n\n")
-    
+
         if @dream.save
           flash[:notice] = "The dream was rejected."
           redirect_to :action => 'dreams', :state => 1
         else
           render :action => "editreject"
-        end  
+        end
       else
         flash[:notice] = "No reject without reject message."
         redirect_to :action => 'dreams', :state => 1
@@ -84,7 +84,7 @@ class AdminController < ApplicationController
     else
       flash[:notice] = "Only submitted dreams can be rejected."
       redirect_to :action => 'dreams', :state => 1
-    end  
+    end
   end
 
   protected
@@ -95,5 +95,5 @@ class AdminController < ApplicationController
       end
     end
     redirect_to root_url
-  end 
+  end
 end
