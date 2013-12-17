@@ -15,6 +15,7 @@ end
 
 group :production do
   gem 'shelly-dependencies'
+  gem 'thin'
 end
 
 gem "haml-rails"
