@@ -19,7 +19,7 @@ end
 
 gem "haml-rails"
 gem 'sass-rails'
-gem 'bootstrap-sass', '~> 2.3.2'
+gem 'bootstrap-sass'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'growlyflash'
